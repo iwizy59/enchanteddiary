@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:enchanteddiary/emotion/emotion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:enchanteddiary/footer.dart';
 
 class AddEntryWidget extends StatefulWidget {
   final DateTime dateToAddEntry;
@@ -15,11 +17,18 @@ class AddEntryWidget extends StatefulWidget {
 }
 
 class _AddEntryWidgetState extends State<AddEntryWidget> {
+  Color appBarColor = Colors.cyan;
+  void updateAppBarColor(Color color) {
+    setState(() {
+      appBarColor = color;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: appBarColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -96,10 +105,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                     style: TextStyle(fontWeight: FontWeight.w800, fontSize: 19),
                   ),
                 ),
-                Container(
-                  height: 70,
-                  color: Colors.amber,
-                )
+                EmojiMap(updateAppBarColor),
               ],
             ),
             Expanded(
@@ -124,6 +130,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                 ),
               ),
             )),
+            Footer(),
           ],
         ),
       ),
