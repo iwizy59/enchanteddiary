@@ -1,4 +1,7 @@
-  import 'package:enchanteddiary/calendar/calendar_page.dart';
+
+import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/header/header.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -72,10 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      appBar: CustomHeader(),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
