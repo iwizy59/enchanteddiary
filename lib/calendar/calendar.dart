@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+class CalendarWidget extends StatefulWidget {
+  @override
+  _CalendarWidgetState createState() => _CalendarWidgetState();
+}
+
+class _CalendarWidgetState extends State<CalendarWidget> {
+  DateTime? _selectedDay;
+  DateTime _focusedDay = DateTime.now();
+  @override
+  Widget build(BuildContext context) {
+    return TableCalendar(
+      startingDayOfWeek: StartingDayOfWeek.monday,
+      calendarFormat: CalendarFormat.month,
+      headerStyle: HeaderStyle(
+        titleCentered: true,
+        titleTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Poppins',
+            fontSize: 25,
+        )
+      ),
+      availableCalendarFormats: const {CalendarFormat.month: 'month'},
+      calendarStyle: const CalendarStyle(
+      defaultDecoration: BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.red,
+      ),
+        holidayDecoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.red,
+        ),
+        weekendDecoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.red,
+        ),
+        outsideDaysVisible: false,
+
+    ),
+      firstDay: DateTime.utc(2024, 03, 13),
+      lastDay: DateTime.utc(2030, 3, 14),
+      focusedDay: _focusedDay,
+      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+      onDaySelected: (selectedDay, focusedDay) {
+        setState(() {
+          _selectedDay = selectedDay;
+          _focusedDay = focusedDay;
+        });
+        // Ajoutez ici la logique pour ouvrir un autre widget
+      },
+      onPageChanged: (focusedDay) {
+        setState(() {
+          _focusedDay = focusedDay;
+        });
+      },
+    );
+  }
+}
