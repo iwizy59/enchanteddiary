@@ -1,5 +1,8 @@
 import 'package:enchanteddiary/main.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/settings.dart';
+import 'package:enchanteddiary/cloud_page.dart';
+import 'package:enchanteddiary/search_page.dart';
 
 class Footer extends StatefulWidget {
   @override
@@ -20,13 +23,16 @@ class _FooterState extends State<Footer> {
             context, MaterialPageRoute(builder: (context) => MyApp()));
         break;
       case 1:
-        Navigator.pushNamed(context, '/home');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Cloud()));
         break;
       case 2:
-        Navigator.pushNamed(context, '/home');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Search()));
         break;
       case 3:
-        Navigator.pushNamed(context, '/home');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Settings()));
         break;
     }
   }
