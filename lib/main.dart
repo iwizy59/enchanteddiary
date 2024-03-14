@@ -3,6 +3,9 @@ import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/header/header.dart';
 
 import 'package:enchanteddiary/onboarding/welcome_page.dart';
+import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/pin/pin_config.dart';
+import 'package:enchanteddiary/pin/pin_login.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/footer.dart';
 
