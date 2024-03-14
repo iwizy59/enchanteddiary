@@ -2,7 +2,9 @@
 import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/header/header.dart';
 
+import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/footer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -97,6 +99,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Ouvrir le Calendrier'),
             ),
+            Expanded(
+              child: Container(),
+            ),
+            Footer(),
           ],
         ),
       ),
@@ -108,4 +114,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
