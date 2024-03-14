@@ -1,4 +1,5 @@
-  import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/onboarding/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -96,6 +97,18 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Ouvrir le Calendrier'),
             ),
+            ElevatedButton(
+              style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue)),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => WelcomePageWidget()),
+                );
+              },
+              child: Text('Onboarding'),
+            ),
           ],
         ),
       ),
@@ -107,4 +120,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
