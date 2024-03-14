@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:enchanteddiary/onboarding/final_page.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/header/header.dart';
+
 
 class SecurePageWidget extends StatelessWidget {
   const SecurePageWidget({super.key});
@@ -11,9 +13,7 @@ class SecurePageWidget extends StatelessWidget {
     double ScreenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-      ),
+      appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(35.0),

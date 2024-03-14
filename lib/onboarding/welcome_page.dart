@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/header/header.dart';
 
 import 'secure_page.dart';
 
@@ -12,9 +13,7 @@ class WelcomePageWidget extends StatelessWidget {
     double ScreenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-      ),
+      appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(35.0),
