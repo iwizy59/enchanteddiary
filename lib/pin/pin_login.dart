@@ -1,3 +1,5 @@
+import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/onboarding/final_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/main.dart';
@@ -34,7 +36,7 @@ class _PinFormState extends State<PinForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Welcome back sur EnchantedDiary !\n\nPour accéder à ton espace personnel, renseigne ton code PIN.\n\n',
+              'Welcome back to EnchantedDiary!\n\nTo access your personal space, please enter your PIN.\n\n',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: lightYellow,
@@ -185,7 +187,12 @@ class _PinFormState extends State<PinForm> {
     print(savedPin);
     print(enteredPin);
     if (savedPin == enteredPin) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+      final isFirstStart = prefs.getBool('isFirstStart') ?? true;
+      if(isFirstStart){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FinalPageWidget()));
+      }
+      else
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage()));
     } else {
       showDialog(
         context: context,

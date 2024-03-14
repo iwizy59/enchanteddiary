@@ -75,17 +75,26 @@ class _MyHomePageState extends State<MyHomePage> {
     final prefs = await SharedPreferences.getInstance();
     final isFirstStart = prefs.getBool('isFirstStart') ?? true;
 
-    if (isFirstStart) {
-      // Navigate to Onboarding and set isFirstStart to false after it's done
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomePageWidget()),
-      ); // Your onboarding page route
-      await prefs.setBool('isFirstStart', false);
+      if (isFirstStart) {
+        // Navigate to Onboarding and set isFirstStart to false after it's done
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => WelcomePageWidget()),
+        );
+        await prefs.setBool(
+            'isFirstStart', false); // Your onboarding page route
+      }
+      else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => PinForm()),
+        );
+      }
     }
-  }
 
-  @override
+
+
+    @override
   Widget build(BuildContext context) {
     return Column(
       children: [

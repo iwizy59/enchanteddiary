@@ -25,7 +25,7 @@ class _PinConfigPageState extends State<PinConfigPage> {
       backgroundColor: darkBlue,
       appBar: AppBar(
         title: Text(
-          'Configurer le code PIN',
+          'Configure PIN code',
           style: TextStyle(color: lightYellow),
         ),
         backgroundColor: darkBlue,
@@ -35,7 +35,7 @@ class _PinConfigPageState extends State<PinConfigPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Bienvenue sur EnchantedDiary !\n\nPour sécuriser ton espace personnel, configure un code PIN à 4 caractères.\n\n',
+              'Welcome to EnchantedDiary!\n\nTo secure your personal space, set up a 4-character PIN.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: lightYellow,
@@ -146,7 +146,7 @@ class _PinConfigPageState extends State<PinConfigPage> {
             ),
             ElevatedButton(
               onPressed: () => _onValidateButtonPressed(context),
-              child: Text('Valider'),
+              child: Text('Validate'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: lightYellow, // Couleur lightBlue
               ),
