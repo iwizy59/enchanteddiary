@@ -1,6 +1,7 @@
 import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/onboarding/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/footer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -109,6 +110,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Onboarding'),
             ),
+            Expanded(
+              child: Container(),
+            ),
+            Footer(),
           ],
         ),
       ),
