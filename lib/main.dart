@@ -1,4 +1,6 @@
-  import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/pin/pin_config.dart';
+import 'package:enchanteddiary/pin/pin_login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -96,6 +98,15 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Ouvrir le Calendrier'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PinForm()),
+                );
+              },
+              child: Text('Configurer le code PIN'),
+            ),
           ],
         ),
       ),
@@ -107,4 +118,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
