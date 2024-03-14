@@ -5,6 +5,7 @@ import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/onboarding/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/footer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,6 +62,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstStart();
+  }
+
+  _checkFirstStart() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isFirstStart = prefs.getBool('isFirstStart') ?? true;
+
+    if (isFirstStart) {
+      // Navigate to Onboarding and set isFirstStart to false after it's done
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePageWidget()),
+      ); // Your onboarding page route
+      await prefs.setBool('isFirstStart', false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,18 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
               CalendarPage()
             ], // Assurez-vous que CalendarPage est bien défini ailleurs dans votre code
           ),
-        ),
-        ElevatedButton(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          ),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => WelcomePageWidget()),
-            );
-          },
-          child: Text('Onboarding'),
         ),
       ],
     );
