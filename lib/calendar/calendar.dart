@@ -79,7 +79,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       Expanded(
         child: Container(),
       ),
-      Footer(),
     ]);
   }
 }

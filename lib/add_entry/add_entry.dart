@@ -30,20 +30,23 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
       appBar: AppBar(
         backgroundColor: appBarColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Text(
-                "${widget.dateToAddEntry.day}/${widget.dateToAddEntry.month}/${widget.dateToAddEntry.year}",
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "${widget.dateToAddEntry.day}/${widget.dateToAddEntry.month}/${widget.dateToAddEntry.year}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
             Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
               child: Column(
@@ -130,9 +133,19 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                 ),
               ),
             )),
-            Footer(),
           ],
         ),
+      ),
+    ),
+    // Footer ici, en dehors de Expanded mais toujours dans Column.
+    Container(
+    width: double.infinity,
+    color: Colors.grey[200], // Adjustez selon vos besoins
+    child: Center(
+    child: Footer(), // Remplacez par votre widget de footer
+    ),
+    ),
+        ],
       ),
     );
   }
