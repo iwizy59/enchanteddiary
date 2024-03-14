@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/help/help.dart';
 
-class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
+class CustomHeader extends StatefulWidget implements PreferredSizeWidget {
+  bool showBackButton;
+  final Color appBarColor;
+  Color _appBarColor = Colors.white;
+
+  CustomHeader({this.appBarColor = Colors.white,this.showBackButton = true});
+
+  @override
+  State<CustomHeader> createState() => _CustomHeaderState();
+  @override
+  Size get preferredSize => Size.fromHeight(100.0);
+}
+class _CustomHeaderState extends State<CustomHeader>{
   final String title = "Enchanted Diary";
-  final bool showBackButton;
-  CustomHeader({this.showBackButton = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: showBackButton ? IconButton(
+      backgroundColor: widget.appBarColor,
+      leading: widget.showBackButton ? IconButton(
     icon: Icon(Icons.chevron_left),
     onPressed: () => Navigator.of(context).pop(),
     ) : null,
@@ -45,6 +56,5 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  @override
-  Size get preferredSize => Size.fromHeight(100.0);
+
 }

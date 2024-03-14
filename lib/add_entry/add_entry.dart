@@ -18,7 +18,7 @@ class AddEntryWidget extends StatefulWidget {
 }
 
 class _AddEntryWidgetState extends State<AddEntryWidget> {
-  Color appBarColor = Colors.cyan;
+  Color appBarColor = Colors.white;
   void updateAppBarColor(Color color) {
     setState(() {
       appBarColor = color;
@@ -28,7 +28,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomHeader(),
+      appBar: CustomHeader(appBarColor: this.appBarColor),
       body: Column(
         children: [
           Expanded(
