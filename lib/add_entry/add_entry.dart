@@ -124,7 +124,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(0, 83, 136, 1)),
+                          Color.fromRGBO(37, 49, 56, 1)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

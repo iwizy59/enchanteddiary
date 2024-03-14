@@ -3,6 +3,7 @@ import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/header/header.dart';
 
 import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/onboarding/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/footer.dart';
 
@@ -76,6 +77,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CalendarPage();
+    return Column(
+        children : [
+    ElevatedButton(
+    style: ButtonStyle(
+    foregroundColor:
+    MaterialStateProperty.all<Color>(Colors.blue)),
+    onPressed: () {
+    Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => WelcomePageWidget()),
+    );
+    },
+    child: Text('Onboarding'),
+    ),
+          CalendarPage();
+
   }
 }
