@@ -8,7 +8,7 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomHeader(), // Votre en-tête personnalisé
+      appBar: CustomHeader(showBackButton: false), // Votre en-tête personnalisé
       body: Center(
         child: Column(
           children: [

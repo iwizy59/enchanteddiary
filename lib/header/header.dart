@@ -3,16 +3,16 @@ import 'package:enchanteddiary/help/help.dart';
 
 class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title = "Enchanted Diary";
-
-  CustomHeader();
+  final bool showBackButton;
+  CustomHeader({this.showBackButton = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.chevron_left),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      leading: showBackButton ? IconButton(
+    icon: Icon(Icons.chevron_left),
+    onPressed: () => Navigator.of(context).pop(),
+    ) : null,
       toolbarHeight: 300,
       title: Column(
         children: [

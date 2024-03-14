@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:enchanteddiary/emotion/emotion.dart';
+import 'package:enchanteddiary/header/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:enchanteddiary/footer.dart';
@@ -27,9 +28,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor,
-      ),
+      appBar: CustomHeader(),
       body: Column(
         children: [
           Expanded(

@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/main.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,7 @@ class FinalPageWidget extends StatelessWidget {
     double ScreenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-      ),
+      appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(35.0),
