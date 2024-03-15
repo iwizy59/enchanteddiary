@@ -12,7 +12,14 @@ class WelcomePageWidget extends StatelessWidget {
     double ScreenWidth = MediaQuery.of(context).size.width;
     double ScreenHeight = MediaQuery.of(context).size.height;
 
+    final Color darkBlue = Color(0xFF001244);
+    final Color lightBlue = Color(0xFF005086);
+    final Color skyBlue = Color(0xFF318fb5);
+    final Color lightGray = Color(0xFFb0cac7);
+    final Color lightYellow = Color(0xFFf7d6bf);
+
     return Scaffold(
+      backgroundColor: lightYellow,
       appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
@@ -35,13 +42,13 @@ class WelcomePageWidget extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
-                    new TextSpan(text: 'Bienvenue sur '),
+                    new TextSpan(text: 'Welcome to '),
                     new TextSpan(
                         text: 'EnchantedDiary',
                         style: new TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color.fromRGBO(0, 80, 134, 1))),
-                    new TextSpan(text: ' ton journal intime sécurisé'),
+                    new TextSpan(text: ' your secure personal diary'),
                   ],
                 ),
               ),
@@ -56,7 +63,7 @@ class WelcomePageWidget extends StatelessWidget {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text("Suivant"),
+                  child: Text("Next"),
                 ),
                 style: ButtonStyle(
                     foregroundColor:

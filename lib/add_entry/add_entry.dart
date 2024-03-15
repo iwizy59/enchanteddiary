@@ -8,14 +8,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:enchanteddiary/footer.dart';
 
 import '../database/models/note_model.dart';
+import 'package:intl/intl.dart';
 
 class AddEntryWidget extends StatefulWidget {
   final DateTime dateToAddEntry;
 
   const AddEntryWidget({
-    super.key,
+    Key? key,
     required this.dateToAddEntry,
-  });
+  }) : super(key: key);
 
   @override
   State<AddEntryWidget> createState() => _AddEntryWidgetState();
@@ -61,9 +62,17 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
     });
   }
 
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color skyBlue = Color(0xFF318fb5);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightYellow,
       appBar: CustomHeader(appBarColor: this.appBarColor),
       body: Column(
         children: [
@@ -75,10 +84,11 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "${widget.dateToAddEntry.day}/${widget.dateToAddEntry.month}/${widget.dateToAddEntry.year}",
+                      formatDate(widget.dateToAddEntry),
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
+                        color: lightBlue,
                       ),
                     ),
                   ),
@@ -90,9 +100,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                         Padding(
                           padding: EdgeInsets.only(bottom: 5),
                           child: Text(
-                            "Give a title...",
+                            "weave a magic title... 🪄",
                             style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 19),
+                                fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
                           ),
                         ),
                         TextField(
@@ -101,7 +111,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              hintText: "Mon crush..."),
+                              hintText: "Whispers of Moonlight"),
                         ),
                       ],
                     ),
@@ -114,9 +124,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                         Padding(
                           padding: EdgeInsets.only(bottom: 5),
                           child: Text(
-                            "Tell us everything...",
+                            "unravel your tale... ✨",
                             style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 19),
+                                fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
                           ),
                         ),
                         TextField(
@@ -130,7 +140,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2),
                                   borderRadius: BorderRadius.circular(20)),
-                              hintText: "Aabababababab"),
+                              hintText: "Once upon a time, in a realm far away..."),
                         ),
                       ],
                     ),
@@ -141,9 +151,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                       Padding(
                         padding: EdgeInsets.only(bottom: 10),
                         child: Text(
-                          "Choose an emotion...",
+                          "cast an emotion... 🌟",
                           style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 19),
+                              fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
                         ),
                       ),
                       EmojiMap(updateAppBarColor),
@@ -173,7 +183,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Text("Terminer"),
+                          child: Text("SEAL"),
                         ),
                         style: ButtonStyle(
                             foregroundColor:
@@ -194,16 +204,24 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
               ),
             ),
           ),
-          // Footer ici, en dehors de Expanded mais toujours dans Column.
-          Container(
+                Container(
             width: double.infinity,
-            color: Colors.grey[200], // Adjustez selon vos besoins
+            color: Colors.grey[200],
             child: Center(
-              child: Footer(), // Remplacez par votre widget de footer
+              child: Footer(),
             ),
           ),
         ],
       ),
     );
   }
+}
+
+String formatDate(DateTime date) {
+  var suffix = "th";
+  int digit = date.day % 10;
+  if ((digit > 0 && digit < 4) && (date.day < 11 || date.day > 13)) {
+    suffix = ["st", "nd", "rd"][digit - 1];
+  }
+  return "${date.day}$suffix of ${DateFormat('MMMM yyyy').format(date)}";
 }

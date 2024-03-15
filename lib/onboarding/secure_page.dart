@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:enchanteddiary/onboarding/final_page.dart';
+import 'package:enchanteddiary/pin/pin_config.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/header/header.dart';
 
@@ -12,7 +13,14 @@ class SecurePageWidget extends StatelessWidget {
     double ScreenWidth = MediaQuery.of(context).size.width;
     double ScreenHeight = MediaQuery.of(context).size.height;
 
+    final Color darkBlue = Color(0xFF001244);
+    final Color lightBlue = Color(0xFF005086);
+    final Color skyBlue = Color(0xFF318fb5);
+    final Color lightGray = Color(0xFFb0cac7);
+    final Color lightYellow = Color(0xFFf7d6bf);
+
     return Scaffold(
+      backgroundColor: lightYellow,
       appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
@@ -37,7 +45,7 @@ class SecurePageWidget extends StatelessWidget {
                   children: <TextSpan>[
                     new TextSpan(
                         text:
-                            'Avant tout, tu vas devoir saisir un code pin pour sécuriser ton Diary'),
+                            'First, you will need to set a PIN to secure your Diary.'),
                   ],
                 ),
               ),
@@ -46,13 +54,13 @@ class SecurePageWidget extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => FinalPageWidget(),
+                      builder: (context) => PinConfigPage(),
                     ),
                   );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text("Suivant"),
+                  child: Text("Next"),
                 ),
                 style: ButtonStyle(
                     foregroundColor:

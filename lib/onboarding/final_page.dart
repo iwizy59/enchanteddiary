@@ -1,7 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/main.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FinalPageWidget extends StatelessWidget {
   const FinalPageWidget({super.key});
@@ -11,7 +13,14 @@ class FinalPageWidget extends StatelessWidget {
     double ScreenWidth = MediaQuery.of(context).size.width;
     double ScreenHeight = MediaQuery.of(context).size.height;
 
+    final Color darkBlue = Color(0xFF001244);
+    final Color lightBlue = Color(0xFF005086);
+    final Color skyBlue = Color(0xFF318fb5);
+    final Color lightGray = Color(0xFFb0cac7);
+    final Color lightYellow = Color(0xFFf7d6bf);
+
     return Scaffold(
+      backgroundColor: lightYellow,
       appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(
@@ -21,7 +30,7 @@ class FinalPageWidget extends StatelessWidget {
             children: [
               Image.asset("assets/images/onboarding/check.png",
                   width: ScreenWidth * 0.65),
-              Text("C’est prêt !",
+              Text("It's ready !",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -34,7 +43,7 @@ class FinalPageWidget extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
-                    new TextSpan(text: 'Tu vas enfin pouvoir profiter de ton '),
+                    new TextSpan(text: 'You will finally be able to enjoy your '),
                     new TextSpan(
                         text: 'EnchantedDiary',
                         style: new TextStyle(
@@ -44,19 +53,21 @@ class FinalPageWidget extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MyHomePage(
-                        title: '',
+                      builder: (context) => CalendarPage(
                       ),
                     ),
                   );
+                  await prefs.setBool('isFirstStart', false);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text("Suivant"),
+                  child: Text("Next"),
                 ),
                 style: ButtonStyle(
                     foregroundColor:

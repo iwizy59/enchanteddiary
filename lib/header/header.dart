@@ -4,9 +4,9 @@ import 'package:enchanteddiary/help/help.dart';
 class CustomHeader extends StatefulWidget implements PreferredSizeWidget {
   bool showBackButton;
   final Color appBarColor;
-  Color _appBarColor = Colors.white;
+  Color _appBarColor = Color(0xFF318fb5);
 
-  CustomHeader({this.appBarColor = Colors.white,this.showBackButton = true});
+  CustomHeader({this.appBarColor = const Color(0xFF318fb5),this.showBackButton = true});
 
   @override
   State<CustomHeader> createState() => _CustomHeaderState();
@@ -14,11 +14,12 @@ class CustomHeader extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(100.0);
 }
 class _CustomHeaderState extends State<CustomHeader>{
-  final String title = "Enchanted Diary";
+  final String title = "EnchantedDiary";
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: widget.appBarColor,
       leading: widget.showBackButton ? IconButton(
     icon: Icon(Icons.chevron_left),
@@ -29,13 +30,13 @@ class _CustomHeaderState extends State<CustomHeader>{
         children: [
           SizedBox(height: 10),
           Image.asset(
-            'assets/images/EnchantedDiary.png', // Assurez-vous que le chemin vers votre logo est correct.
+            'assets/images/EnchantedDiary.png',
             height: 50,
-            width: 50,// Ajustez la taille selon vos besoins.
+            width: 50,
           ),
           Text(
             title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Poppins'), // Ajustez selon vos besoins.
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Poppins', color: Color(0xFF001244)),
           ),
         ],
       ),
@@ -43,12 +44,10 @@ class _CustomHeaderState extends State<CustomHeader>{
         IconButton(
           icon: Icon(Icons.help_outline),
           onPressed: () {
-            // Rediriger vers la page d'aide
             Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => HelpPage()));}
 
-     // Action pour le bouton d'aide.
         ),
 
       ],
