@@ -1,5 +1,7 @@
 import 'package:enchanteddiary/pin/secret_question_config.dart';
+import 'package:enchanteddiary/pin/secret_question_form.dart';
 import 'package:flutter/material.dart';
+import 'package:enchanteddiary/settings/username.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
@@ -105,16 +107,13 @@ class _SettingWidgetState extends State<SettingWidget> {
                     radius: 30,
                   ),
                   SizedBox(width: 16),
-                  Text(
-                    _prefs.getString('username') ?? 'Username',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Expanded( // Ajoutez ceci
+                    child: UsernameEditorRow(),
                   ),
                 ],
               ),
             ),
+
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, top: 8),
@@ -128,10 +127,10 @@ class _SettingWidgetState extends State<SettingWidget> {
             ),
           ),
           ListTile(
-            title: Text("Change Settings"),
+            title: Text("Change PIN"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionConfigPage()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionFormPage()));
             },
           ),
           ListTile(
