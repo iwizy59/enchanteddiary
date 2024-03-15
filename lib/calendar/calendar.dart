@@ -1,7 +1,6 @@
 import 'package:enchanteddiary/add_entry/add_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:enchanteddiary/footer.dart';
 
 class CalendarWidget extends StatefulWidget {
   @override
@@ -54,7 +53,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           ),
           outsideDaysVisible: false,
         ),
-        firstDay: DateTime.utc(2024, 03, 13),
+        firstDay: DateTime.utc(2024, 03, 01),
         lastDay: DateTime.utc(2030, 3, 14),
         focusedDay: _focusedDay,
         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),

@@ -3,6 +3,7 @@ import 'package:enchanteddiary/header/header.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'calendar.dart';
+import 'calendar.dart'; // Assurez-vous que le chemin vers le widget du calendrier est correct
 
 class CalendarPage extends StatelessWidget {
 
@@ -32,7 +33,7 @@ class CalendarPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Footer(),
             ),
-            Container(child : ElevatedButton(
+            /*Container(child : ElevatedButton(
 
     onPressed: () async {
       final prefs = await SharedPreferences.getInstance();
@@ -40,10 +41,10 @@ class CalendarPage extends StatelessWidget {
 
     }, child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text("Reset pin"),
+              child: Text("Reset first start"),
             ),
-    ),
-    ),
+    ),*/
+
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:enchanteddiary/calendar/calendar_page.dart';
-import 'package:enchanteddiary/onboarding/final_page.dart';
+import 'package:enchanteddiary/pin/secret_question_config.dart';
+import 'package:enchanteddiary/pin/secret_question_form.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/main.dart';
@@ -147,6 +148,13 @@ class _PinFormState extends State<PinForm> {
                 backgroundColor: lightYellow, // Couleur lightBlue
               ),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionFormPage()));
+              },
+              child: Text('Reset PIN', style: TextStyle(color: Colors.blue)),
+            )
+
           ],
         ),
       ),
@@ -184,7 +192,7 @@ class _PinFormState extends State<PinForm> {
     if (savedPin == enteredPin) {
       final isFirstStart = prefs.getBool('isFirstStart') ?? true;
       if(isFirstStart){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FinalPageWidget()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionConfigPage()));
       }
       else
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage()));

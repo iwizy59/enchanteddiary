@@ -4,6 +4,7 @@ import 'package:enchanteddiary/header/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:enchanteddiary/footer.dart';
+import 'package:intl/intl.dart';
 
 class AddEntryWidget extends StatefulWidget {
   final DateTime dateToAddEntry;
@@ -47,7 +48,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "${widget.dateToAddEntry.day}/${widget.dateToAddEntry.month}/${widget.dateToAddEntry.year}",
+                      formatDate(widget.dateToAddEntry),
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
@@ -156,4 +157,13 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
       ),
     );
   }
+}
+
+String formatDate(DateTime date) {
+  var suffix = "th";
+  int digit = date.day % 10;
+  if ((digit > 0 && digit < 4) && (date.day < 11 || date.day > 13)) {
+    suffix = ["st", "nd", "rd"][digit - 1];
+  }
+  return "${date.day}$suffix of ${DateFormat('MMMM yyyy').format(date)}";
 }
