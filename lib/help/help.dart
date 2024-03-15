@@ -12,7 +12,7 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightYellow,
-      appBar: CustomHeader(showBackButton: false),
+      appBar: CustomHeader(showBackButton: true),
       body: SingleChildScrollView( 
         padding: const EdgeInsets.all(16),
         child: Column(

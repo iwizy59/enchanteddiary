@@ -1,3 +1,4 @@
+import 'package:enchanteddiary/pin/secret_question_config.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
@@ -60,7 +61,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                   SizedBox(width: 16),
                   Text(
-                    'Nom de l\'utilisateur',
+                    _prefs.getString('username') ?? 'Username',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -82,10 +83,10 @@ class _SettingWidgetState extends State<SettingWidget> {
             ),
           ),
           ListTile(
-            title: Text("Change PIN"),
+            title: Text("Change Settings"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              // Action lorsqu'on clique sur "Changer de mot de passe"
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionConfigPage()));
             },
           ),
           ListTile(

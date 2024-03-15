@@ -1,4 +1,5 @@
 import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/settings.dart';
 import 'package:enchanteddiary/cloud_page.dart';
@@ -19,7 +20,7 @@ class _FooterState extends State<Footer> {
 
     switch (index) {
       case 0:
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => CalendarPage()));
         break;
       case 1:
@@ -32,7 +33,7 @@ class _FooterState extends State<Footer> {
         break;
       case 3:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Settings()));
+            context, MaterialPageRoute(builder: (context) => SettingWidget()));
         break;
     }
   }

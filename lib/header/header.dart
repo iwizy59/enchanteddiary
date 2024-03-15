@@ -19,6 +19,7 @@ class _CustomHeaderState extends State<CustomHeader>{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: widget.appBarColor,
       leading: widget.showBackButton ? IconButton(
     icon: Icon(Icons.chevron_left),
