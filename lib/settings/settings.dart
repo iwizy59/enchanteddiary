@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingWidget extends StatefulWidget {
   @override
@@ -10,8 +10,10 @@ class SettingWidget extends StatefulWidget {
 
 class _SettingWidgetState extends State<SettingWidget> {
   late SharedPreferences _prefs;
-  late bool pushNotifications = false;
-  late bool darkMode = false;
+  bool pushNotifications = false;
+  bool darkMode = false;
+  String userImage = 'assets/images/Matt.jpg';
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +39,51 @@ class _SettingWidgetState extends State<SettingWidget> {
     await _prefs.setBool(key, value);
   }
 
+  Future<void> _showPhotoSelectionDialog() async {
+    String? newImage = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Sélectionner une photo"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildPhotoOption('assets/images/Alexis.jpg'),
+              _buildPhotoOption('assets/images/Clara.jpg'),
+              _buildPhotoOption('assets/images/Matt.jpg'),
+              _buildPhotoOption('assets/images/Mathias.jpg'),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (newImage != null) {
+      setState(() {
+        userImage = newImage;
+      });
+    }
+  }
+
+  Widget _buildPhotoOption(String imagePath) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          userImage = imagePath;
+        });
+        Navigator.of(context)
+            .pop(); // Fermer la boîte de dialogue après la sélection
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          backgroundImage: AssetImage(imagePath),
+          radius: 30,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,16 +93,14 @@ class _SettingWidgetState extends State<SettingWidget> {
         children: [
           InkWell(
             onTap: () {
-              // Action lorsque la photo est cliquée
+              _showPhotoSelectionDialog();
             },
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   CircleAvatar(
-                    // Remplacez cette image par l'image de l'utilisateur
-                    backgroundImage:
-                        AssetImage('assets/images/onboarding/cat.jpg'),
+                    backgroundImage: AssetImage(userImage),
                     radius: 30,
                   ),
                   SizedBox(width: 16),
@@ -99,11 +144,11 @@ class _SettingWidgetState extends State<SettingWidget> {
             ),
           ),
           ListTile(
-            title: Text("Dark mode"),
+            title: Text("Mode sombre"),
             trailing: Switch(
-              value: darkMode,
               activeColor: Color.fromRGBO(127, 202, 199, 1.0),
-              onChanged: (newValue) async {
+              value: darkMode,
+              onChanged: (newValue) {
                 _saveSetting('darkMode', newValue);
               },
             ),
@@ -140,6 +185,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               // Action lorsqu'on clique sur "Conditions d'utilisation"
             },
           ),
+          // Le reste de votre contenu...
           Spacer(),
           Container(
             color: Colors.grey[200],
