@@ -1,13 +1,8 @@
 
 import 'package:enchanteddiary/calendar/calendar_page.dart';
-import 'package:enchanteddiary/header/header.dart';
-
 import 'package:enchanteddiary/onboarding/welcome_page.dart';
-import 'package:enchanteddiary/calendar/calendar_page.dart';
-import 'package:enchanteddiary/pin/pin_config.dart';
 import 'package:enchanteddiary/pin/pin_login.dart';
 import 'package:flutter/material.dart';
-import 'package:enchanteddiary/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -81,8 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(builder: (context) => WelcomePageWidget()),
         );
-        await prefs.setBool(
-            'isFirstStart', false); // Your onboarding page route
+// Your onboarding page route
       }
       else {
         Navigator.pushReplacement(

@@ -1,3 +1,4 @@
+import 'package:enchanteddiary/pin/secret_question_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/pin/pin_login.dart';
@@ -199,11 +200,21 @@ class _PinConfigPageState extends State<PinConfigPage> {
     print('Code PIN enregistré: $enteredPin');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('pin', enteredPin);
+    final isFirstStart = prefs.getBool('isFirstStart') ?? true;
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => PinForm()),
-    );
+    if(isFirstStart)
+    {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SecretQuestionConfigPage()),
+      );
+    }
+    else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => PinForm()),
+      );
+    }
   }
 }
 
