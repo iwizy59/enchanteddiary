@@ -3,6 +3,7 @@ import 'package:enchanteddiary/onboarding/final_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/main.dart';
+import 'package:enchanteddiary/header/header.dart';
 
 class PinForm extends StatefulWidget {
   @override
@@ -23,14 +24,8 @@ class _PinFormState extends State<PinForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomHeader(showBackButton: false),
       backgroundColor: darkBlue,
-      appBar: AppBar(
-        title: Text(
-          'Connexion',
-          style: TextStyle(color: lightYellow),
-        ),
-        backgroundColor: darkBlue,
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -13,7 +13,14 @@ class FinalPageWidget extends StatelessWidget {
     double ScreenWidth = MediaQuery.of(context).size.width;
     double ScreenHeight = MediaQuery.of(context).size.height;
 
+    final Color darkBlue = Color(0xFF001244);
+    final Color lightBlue = Color(0xFF005086);
+    final Color skyBlue = Color(0xFF318fb5);
+    final Color lightGray = Color(0xFFb0cac7);
+    final Color lightYellow = Color(0xFFf7d6bf);
+
     return Scaffold(
+      backgroundColor: lightYellow,
       appBar: CustomHeader(showBackButton: false),
       body: Center(
         child: Padding(

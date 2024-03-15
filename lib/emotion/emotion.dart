@@ -1,4 +1,3 @@
-import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:flutter/material.dart';
 
 class EmojiMap extends StatefulWidget {
@@ -11,7 +10,6 @@ class EmojiMap extends StatefulWidget {
 
 class _EmojiMapState extends State<EmojiMap> {
   String? selectedEmoji;
-  String? hoveredEmoji;
   Map<String, String> emojiMap = {
     '🤩': 'Excited',
     '😊': 'Happy',
@@ -32,7 +30,8 @@ class _EmojiMapState extends State<EmojiMap> {
   void updateSelectorColor(Color color) {
     widget.updateColor(color);
   }
-
+  
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -45,16 +44,26 @@ class _EmojiMapState extends State<EmojiMap> {
             widget.updateColor(colorMap[emojiMap[emoji]!] ?? Colors.cyan);
             updateSelectorColor(colorMap[emojiMap[emoji]!] ?? Colors.cyan);
           },
-          child: Stack(
+          child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    emoji,
-                    style: TextStyle(
-                      fontSize: 30.0,
-                    ),
-                  )),
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  emoji,
+                  style: TextStyle(
+                    fontSize: 30.0,
+                  ),
+                ),
+              ),
+              if (selectedEmoji == emoji)
+                Text(
+                  emojiMap[emoji]!.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF001244),
+                  ),
+                ),
             ],
           ),
         );

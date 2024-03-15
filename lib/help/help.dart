@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
-
+import 'package:enchanteddiary/header/header.dart';
+import 'package:enchanteddiary/emotion/emotion.dart';
 
 class HelpPage extends StatelessWidget {
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Help'),
-      ),
-      body: SingleChildScrollView( // Ajouté pour permettre le défilement si le contenu est long
-        padding: const EdgeInsets.all(16), // Ajouté pour un peu d'espace autour du texte
-        child: Column( // Utiliser Column pour organiser le contenu verticalement
-          crossAxisAlignment: CrossAxisAlignment.start, // Aligner le texte à gauche
+      backgroundColor: lightYellow,
+      appBar: CustomHeader(showBackButton: false),
+      body: SingleChildScrollView( 
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'About EnchantedDiary',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10), // Espace entre le titre et la description
-            Text(
-              'EnchantedDiary is a magical digital diary designed to offer an immersive and captivating experience. It aims to foster introspection among its users, help manage their emotions, and meaningfully anchor their memories.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 20), // Espace avant la section suivante
-            Text(
-              'Defining Your Daily Emotion',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              '⚗️ ABOUT EnchantedDiary...',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Poppins', color: lightBlue),
             ),
             SizedBox(height: 10),
             Text(
-              'Defining your daily emotion in EnchantedDiary helps in understanding your emotional patterns over time, encouraging emotional awareness and growth. It is a step towards mindful introspection and personal development.',
-              style: TextStyle(fontSize: 16),
+              "Welcome to EnchantedDiary, your digital heaven station to capture moments and emotions of your life. Dive into a place where every entry is an enchanting experience, weaving tales of your life's journey. So are you ready for a magical journaling adventure? It's time to dream... and shine brighter!\n",
+              style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: darkBlue),
+            ),
+            Text(
+              '✨ DAILY MOOD feature',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Poppins', color: lightBlue),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Share the magic in every moment with the daily mood feature. Select from a spectrum of enchanting emotions to capture the essence of your daily experiences. Watch as your entries come alive, the million splashes of colours popping on your calendar. A true reflection of your inner mind.\n",
+              style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: darkBlue),
+            ),
+            Text(
+              '☁️ WORLD CLOUD feature',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Poppins', color: lightBlue),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Behold the mystical world cloud, where your words transcend into art. Simply choose a date range, and watch as the most enchanting wwords from your entries dance together in a captivating display. Let the world cloud illuminate the essence of your journey in a spellbinding visual experience.",
+              style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: darkBlue),
             ),
           ],
         ),

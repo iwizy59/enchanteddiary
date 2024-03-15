@@ -4,7 +4,7 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Page de recherche",
+      "\n\n\nTo be developped\nSEARCH FEATURE!",
     );
   }
 }

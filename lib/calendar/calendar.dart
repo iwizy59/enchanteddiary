@@ -10,6 +10,12 @@ class CalendarWidget extends StatefulWidget {
 
 class _CalendarWidgetState extends State<CalendarWidget> {
   Color selectedColor = Colors.transparent;
+  
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color skyBlue = Color(0xFF318fb5);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
 
   void updateSelectorColor(Color color) {
     setState(() {
@@ -36,15 +42,15 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         calendarStyle: const CalendarStyle(
           defaultDecoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red,
+            color: Color(0xFFf7d6bf),
           ),
           holidayDecoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red,
+            color: Color(0xFFf7d6bf),
           ),
           weekendDecoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red,
+            color: Color(0xFFf7d6bf),
           ),
           outsideDaysVisible: false,
         ),
@@ -59,7 +65,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               _focusedDay = focusedDay;
             });
             BoxDecoration(
-              color: selectedColor,
+              color: lightBlue,
             );
             Navigator.push(
               context,
