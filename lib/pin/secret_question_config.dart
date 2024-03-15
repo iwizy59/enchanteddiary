@@ -14,7 +14,6 @@ class _SecretQuestionConfigPageState extends State<SecretQuestionConfigPage> {
   void _saveSecretAnswer() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('secretAnswer', _answerController.text);
-    await prefs.setString('username', _answerUsernameController.text);
     await prefs.setBool('isFirstStart', false);
     Navigator.pushReplacement(
       context,
