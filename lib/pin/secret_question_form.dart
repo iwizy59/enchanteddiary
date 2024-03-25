@@ -72,8 +72,8 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
                 onPressed: _checkSecretAnswer,
                 child: Text("Submit"),
                 style: ElevatedButton.styleFrom(
-                  primary: darkBlue, // Couleur du bouton
-                  onPrimary: Colors.white, // Couleur du texte du bouton
+                  backgroundColor: darkBlue, // Couleur du bouton
+                  foregroundColor: Colors.white, // Couleur du texte du bouton
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15), // Padding plus grand pour le bouton
                 ),
               ),

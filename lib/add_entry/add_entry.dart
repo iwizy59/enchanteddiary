@@ -195,7 +195,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
 
                           NoteDataSource.insertOrUpdateNote(newNote);
 
-                          Navigator.pop(context);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
