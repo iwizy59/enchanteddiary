@@ -1,16 +1,20 @@
 import 'package:enchanteddiary/database/data_sources/note_data_source.dart';
+import 'package:enchanteddiary/header/header.dart';
 import 'package:flutter/material.dart';
-
+import 'package:enchanteddiary/statistiques.dart';
 import 'database/models/note_model.dart';
 
 class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: SafeArea(
-            child: Column(
+        appBar: CustomHeader(),
+        body: Column(
           children: [
+            Expanded(
+              // Utilisez Expanded pour donner au widget une taille flexible
+              child: EnchantedStats(),
+            ),
             ElevatedButton(
                 onPressed: () async {
                   Note? thisNote = await NoteDataSource.getNoteForDate(
@@ -41,6 +45,6 @@ class Search extends StatelessWidget {
                 },
                 child: Text("Fetch Data")),
           ],
-        )));
+        ));
   }
 }
