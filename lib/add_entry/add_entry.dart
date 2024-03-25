@@ -72,14 +72,25 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:
+        Container(
+        width: double.infinity,
+        color: Colors.grey[200],
+        child:  Footer(),
+      ),
+
+
       backgroundColor: lightYellow,
       appBar: CustomHeader(appBarColor: this.appBarColor),
-      body: Column(
+      body: SafeArea( child : SingleChildScrollView( child :Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          Flexible(
+            fit: FlexFit.loose,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -95,6 +106,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
@@ -119,6 +131,7 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
@@ -142,10 +155,12 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                                   borderRadius: BorderRadius.circular(20)),
                               hintText: "Once upon a time, in a realm far away..."),
                         ),
-                      ],
+        ],
+
                     ),
                   ),
                   Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -159,7 +174,8 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                       EmojiMap(updateAppBarColor),
                     ],
                   ),
-                  Expanded(
+                  Flexible(
+                      fit: FlexFit.loose,
                       child: Container(
                     child: Center(
                       child: ElevatedButton(
@@ -204,14 +220,10 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
               ),
             ),
           ),
-                Container(
-            width: double.infinity,
-            color: Colors.grey[200],
-            child: Center(
-              child: Footer(),
-            ),
-          ),
+
         ],
+      ),
+      ),
       ),
     );
   }
