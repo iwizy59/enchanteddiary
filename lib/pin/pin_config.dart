@@ -1,3 +1,4 @@
+import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/pin/secret_question_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,13 +25,8 @@ class _PinConfigPageState extends State<PinConfigPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkBlue,
-      appBar: AppBar(
-        title: Text(
-          'Configure PIN code',
-          style: TextStyle(color: lightYellow),
-        ),
-        backgroundColor: darkBlue,
-      ),
+      appBar: CustomHeader(showBackButton: false,),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
