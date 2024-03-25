@@ -53,4 +53,33 @@ class NoteDataSource {
       whereArgs: [note.date.toIso8601String().substring(0, 10)],
     );
   }
+
+  static Future<List<Note>> searchNotes(
+      String? emotionColor, String? searchText) async {
+    final Database db = await DatabaseHelper.getDB();
+
+    // Créer une clause WHERE dynamique en fonction des paramètres
+    String whereClause = '';
+    List<dynamic> whereArguments = [];
+
+    if (emotionColor != null) {
+      whereClause += 'color = ?';
+      whereArguments.add(emotionColor);
+    }
+
+    if (searchText != null) {
+      if (whereClause.isNotEmpty) {
+        whereClause += ' AND ';
+      }
+      whereClause += '(title LIKE ? OR text LIKE ?)';
+      whereArguments.add('%$searchText%');
+      whereArguments.add('%$searchText%');
+    }
+
+    // Exécuter la requête avec la clause WHERE dynamique
+    final List<Map<String, dynamic>> maps =
+        await db.query('Note', where: whereClause, whereArgs: whereArguments);
+
+    return maps.map((json) => Note.fromJson(json)).toList();
+  }
 }
