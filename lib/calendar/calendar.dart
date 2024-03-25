@@ -1,4 +1,5 @@
 import 'package:enchanteddiary/add_entry/add_entry.dart';
+import 'package:enchanteddiary/database/data_sources/colors_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -8,19 +9,21 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  Color selectedColor = Colors.transparent;
-  
+  Map<DateTime, Color> noteColors = {};
+
+  @override
+  void initState() {
+    super.initState();
+    DateTime now = DateTime.now();
+    _updateNoteColors(DateTime(now.year, now.month, 1), DateTime(now.year, now.month + 1, 0));
+  }
+
   final Color darkBlue = Color(0xFF001244);
   final Color lightBlue = Color(0xFF005086);
   final Color skyBlue = Color(0xFF318fb5);
   final Color lightGray = Color(0xFFb0cac7);
   final Color lightYellow = Color(0xFFf7d6bf);
 
-  void updateSelectorColor(Color color) {
-    setState(() {
-      selectedColor = color;
-    });
-  }
 
   DateTime? _selectedDay;
   DateTime _focusedDay = DateTime.now();
@@ -28,6 +31,33 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   Widget build(BuildContext context) {
     return Column(children: [
       TableCalendar(
+        calendarBuilders: CalendarBuilders(
+          defaultBuilder: (context, date, _) {
+            if (noteColors.containsKey(date)) {
+              return Container(
+                margin: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+
+                  color: noteColors[date] != Colors.white ? noteColors[date] : Color(0xFFf7d6bf),
+                ),
+                child: Center(child: Text('${date.day}')),
+              );
+            }
+            return null;
+          },
+        ),
+
+        onPageChanged: (focusedDay) {
+          DateTime firstDayOfMonth = DateTime(focusedDay.year, focusedDay.month, 1);
+          DateTime lastDayOfMonth = DateTime(focusedDay.year, focusedDay.month + 1, 0);
+          getNoteColorsForMonth(firstDayOfMonth, lastDayOfMonth).then((map) {
+            setState(() {
+              noteColors = map;
+              _focusedDay = focusedDay;
+            });
+          });
+        },
         startingDayOfWeek: StartingDayOfWeek.monday,
         calendarFormat: CalendarFormat.month,
         headerStyle: HeaderStyle(
@@ -63,9 +93,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
             });
-            BoxDecoration(
-              color: lightBlue,
-            );
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -75,15 +102,18 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
         },
-        onPageChanged: (focusedDay) {
-          setState(() {
-            _focusedDay = focusedDay;
-          });
-        },
+
       ),
       Expanded(
         child: Container(),
       ),
     ]);
+  }
+
+  void _updateNoteColors(DateTime start, DateTime end) async {
+    Map<DateTime, Color> newColors = await getNoteColorsForMonth(start, end);
+    setState(() {
+      noteColors = newColors;
+    });
   }
 }
