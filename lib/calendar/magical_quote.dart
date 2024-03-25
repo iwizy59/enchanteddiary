@@ -25,6 +25,8 @@ class MagicalQuote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double ScreenWidth = MediaQuery.of(context).size.width;
+    double ScreenHeight = MediaQuery.of(context).size.height;
     Random random = Random();
     int index = random.nextInt(magicalQuotes.length);
     String quote = magicalQuotes[index];
@@ -39,7 +41,7 @@ class MagicalQuote extends StatelessWidget {
           quote,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 40,
+            fontSize: ScreenHeight * 0.03,
             fontWeight: FontWeight.bold,
             fontStyle: FontStyle.italic,
             fontFamily: 'DancingScript',

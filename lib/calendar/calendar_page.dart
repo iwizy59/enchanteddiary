@@ -6,7 +6,6 @@ import 'calendar.dart';
 import 'magical_quote.dart';
 
 class CalendarPage extends StatelessWidget {
-
   final Color darkBlue = Color(0xFF001244);
   final Color lightBlue = Color(0xFF005086);
   final Color skyBlue = Color(0xFF318fb5);
@@ -15,6 +14,8 @@ class CalendarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double ScreenWidth = MediaQuery.of(context).size.width;
+    double ScreenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: lightGray,
       appBar: CustomHeader(showBackButton: false),
@@ -29,7 +30,8 @@ class CalendarPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              color: Colors.grey[200],
+              height: ScreenHeight * 0.23,
+              color: Colors.red[200],
               alignment: Alignment.center,
               child: MagicalQuote(),
             ),
@@ -45,4 +47,3 @@ class CalendarPage extends StatelessWidget {
     );
   }
 }
-

@@ -199,36 +199,35 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
 
                                   NoteDataSource.insertOrUpdateNote(newNote);
 
-                                  Navigator.pop(context);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Text("SEAL"),
-                                ),
-                                style: ButtonStyle(
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.white),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Color.fromRGBO(37, 49, 56, 1)),
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            side: BorderSide(
-                                                color: Color.fromRGBO(
-                                                    0, 83, 136, 1))))),
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              )
-            ],
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text("SEAL"),
+                        ),
+                        style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color.fromRGBO(37, 49, 56, 1)),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(
+                                        color:
+                                            Color.fromRGBO(0, 83, 136, 1))))),
+                      ),
+                    ),
+                  )),
+                ],
+              ),
+            ),
           ),
-        ),
+
+        ],
+      ),
+      ),
       ),
     );
   }
