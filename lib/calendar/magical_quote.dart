@@ -20,7 +20,6 @@ class MagicalQuote extends StatelessWidget {
     "Dance in the moonlight and let the stars guide your path.",
     "Unleash your inner magic and let your spirit soar.",
     "Open your heart to the enchantment all around you.",
-    "Explore, dream, discover – and never forget the magic within.",
     "Life's too short to be ordinary – let's make it magical!"
   ];
 
