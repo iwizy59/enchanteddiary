@@ -1,6 +1,8 @@
 import 'package:enchanteddiary/emotion/emotion.dart';
+import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/search/result_page.dart';
+import 'package:enchanteddiary/statistiques.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -24,6 +26,11 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: Container(
+          width: double.infinity,
+          color: Colors.grey[200],
+          child: Footer(),
+        ),
         appBar: CustomHeader(appBarColor: Colors.white),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -149,7 +156,10 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Expanded(
+                child: EnchantedStats(),
+              ),
             ],
           ),
         ));

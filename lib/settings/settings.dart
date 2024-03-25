@@ -1,3 +1,4 @@
+import 'package:enchanteddiary/help/help.dart';
 import 'package:enchanteddiary/pin/secret_question_config.dart';
 import 'package:enchanteddiary/pin/secret_question_form.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:enchanteddiary/settings/username.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
+import 'package:enchanteddiary/settings/privacy_policy.dart';
+import 'package:enchanteddiary/settings/terms_and_conditions.dart';
 
 class SettingWidget extends StatefulWidget {
   @override
@@ -107,13 +110,13 @@ class _SettingWidgetState extends State<SettingWidget> {
                     radius: 30,
                   ),
                   SizedBox(width: 16),
-                  Expanded( // Ajoutez ceci
+                  Expanded(
+                    // Ajoutez ceci
                     child: UsernameEditorRow(),
                   ),
                 ],
               ),
             ),
-
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, top: 8),
@@ -130,7 +133,10 @@ class _SettingWidgetState extends State<SettingWidget> {
             title: Text("Change PIN"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SecretQuestionFormPage()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SecretQuestionFormPage()));
             },
           ),
           ListTile(
@@ -168,24 +174,28 @@ class _SettingWidgetState extends State<SettingWidget> {
             title: Text("About us"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              // Action lorsqu'on clique sur "À propos de nous"
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HelpPage()));
             },
           ),
           ListTile(
             title: Text("Privacy policy"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              // Action lorsqu'on clique sur "Politique de confidentialité"
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
             },
           ),
           ListTile(
             title: Text("Terms and conditions"),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              // Action lorsqu'on clique sur "Conditions d'utilisation"
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FancyTermsAndConditionsPage()));
             },
           ),
-          // Le reste de votre contenu...
           Spacer(),
           Container(
             color: Colors.grey[200],
