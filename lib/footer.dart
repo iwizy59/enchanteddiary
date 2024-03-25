@@ -1,9 +1,9 @@
 import 'package:enchanteddiary/calendar/calendar_page.dart';
+import 'package:enchanteddiary/search/search_page.dart';
 import 'package:enchanteddiary/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/settings.dart';
 import 'package:enchanteddiary/cloud_page.dart';
-import 'package:enchanteddiary/search_page.dart';
 
 class Footer extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _FooterState extends State<Footer> {
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Search()));
+            context, MaterialPageRoute(builder: (context) => SearchPage()));
         break;
       case 3:
         Navigator.push(
@@ -47,32 +47,32 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-        backgroundColor: skyBlue,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "HOME",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cloud),
-            label: "CLOUD",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "SEARCH",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "SETTINGS",
-          ),
-        ],
-        selectedItemColor: darkBlue,
-        unselectedItemColor: darkBlue,
-        selectedLabelStyle: TextStyle(fontFamily: 'Poppins'),
-        unselectedLabelStyle: TextStyle(fontFamily: 'Poppins'),
-  );
+      backgroundColor: skyBlue,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "HOME",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.cloud),
+          label: "CLOUD",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: "SEARCH",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: "SETTINGS",
+        ),
+      ],
+      selectedItemColor: darkBlue,
+      unselectedItemColor: darkBlue,
+      selectedLabelStyle: TextStyle(fontFamily: 'Poppins'),
+      unselectedLabelStyle: TextStyle(fontFamily: 'Poppins'),
+    );
   }
 }

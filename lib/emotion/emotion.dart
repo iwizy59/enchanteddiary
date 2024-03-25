@@ -1,5 +1,29 @@
 import 'package:flutter/material.dart';
 
+Map<String, String> emojiMap = {
+  '🤩': 'Excited',
+  '😊': 'Happy',
+  '😐': 'Meh',
+  '😢': 'Sad',
+  '😡': 'Frustated',
+};
+
+Map<String, Color> colorMap = {
+  'Excited': Color.fromRGBO(252, 171, 16, 1.0),
+  'Happy': Color.fromRGBO(180, 235, 202, 1.0),
+  'Sad': Color.fromRGBO(188, 244, 245, 1.0),
+  'Meh': Color.fromRGBO(180, 160, 229, 1.0),
+  'Frustated': Color.fromRGBO(255, 183, 195, 1.0)
+};
+
+String? getColorFromEmoji(String emoji) {
+  String? emotion = emojiMap[emoji];
+  if (emotion != null) {
+    return ('#${colorMap[emotion]!.value.toRadixString(16).substring(2)}');
+  }
+  return null;
+}
+
 class EmojiMap extends StatefulWidget {
   final Function(Color) updateColor;
 
@@ -10,27 +34,12 @@ class EmojiMap extends StatefulWidget {
 
 class _EmojiMapState extends State<EmojiMap> {
   String? selectedEmoji;
-  Map<String, String> emojiMap = {
-    '🤩': 'Excited',
-    '😊': 'Happy',
-    '😐': 'Meh',
-    '😢': 'Sad',
-    '😡': 'Frustated',
-  };
-
-  Map<String, Color> colorMap = {
-    'Excited': Color.fromRGBO(252, 171, 16, 1.0),
-    'Happy': Color.fromRGBO(180, 235, 202, 1.0),
-    'Sad': Color.fromRGBO(188, 244, 245, 1.0),
-    'Meh': Color.fromRGBO(180, 160, 229, 1.0),
-    'Frustated': Color.fromRGBO(255, 183, 195, 1.0)
-  };
 
   @override
   void updateSelectorColor(Color color) {
     widget.updateColor(color);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Row(

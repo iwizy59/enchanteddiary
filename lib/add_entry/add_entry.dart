@@ -68,7 +68,6 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
   final Color lightGray = Color(0xFFb0cac7);
   final Color lightYellow = Color(0xFFf7d6bf);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +113,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                           child: Text(
                             "weave a magic title... 🪄",
                             style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 19,
+                                color: lightBlue),
                           ),
                         ),
                         TextField(
@@ -139,7 +140,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                           child: Text(
                             "unravel your tale... ✨",
                             style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 19,
+                                color: lightBlue),
                           ),
                         ),
                         TextField(
@@ -153,7 +156,8 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2),
                                   borderRadius: BorderRadius.circular(20)),
-                              hintText: "Once upon a time, in a realm far away..."),
+                              hintText:
+                                  "Once upon a time, in a realm far away..."),
                         ),
         ],
 
@@ -168,7 +172,9 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
                         child: Text(
                           "cast an emotion... 🌟",
                           style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 19, color: lightBlue),
+                              fontWeight: FontWeight.w800,
+                              fontSize: 19,
+                              color: lightBlue),
                         ),
                       ),
                       EmojiMap(updateAppBarColor),
@@ -220,7 +226,13 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
               ),
             ),
           ),
-
+          Container(
+            width: double.infinity,
+            color: Colors.grey[200],
+            child: Center(
+              child: Footer(),
+            ),
+          ),
         ],
       ),
       ),
