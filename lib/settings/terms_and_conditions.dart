@@ -11,12 +11,6 @@ class FancyTermsAndConditionsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/images/terms_and_conditions_banner.png',
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
             SizedBox(height: 20.0),
             Text(
               'Terms and Conditions',
