@@ -53,4 +53,14 @@ class NoteDataSource {
       whereArgs: [note.date.toIso8601String().substring(0, 10)],
     );
   }
+
+  static Future<List<Note>> getNotesBetweenDates(DateTime startDate, DateTime endDate) async {
+    final db = await DatabaseHelper.getDB();
+    final List<Map<String, dynamic>> maps = await db.query(
+      'Note',
+      where: 'date BETWEEN ? AND ?',
+      whereArgs: [startDate.toIso8601String().substring(0, 10), endDate.toIso8601String().substring(0, 10)],
+    );
+    return maps.map((json) => Note.fromJson(json)).toList();
+  }
 }
