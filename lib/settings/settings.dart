@@ -18,7 +18,7 @@ class _SettingWidgetState extends State<SettingWidget> {
   late SharedPreferences _prefs;
   bool pushNotifications = false;
   bool darkMode = false;
-  String userImage = 'assets/images/Matt.jpg';
+  String userImage = '';
 
   @override
   void initState() {
@@ -31,10 +31,11 @@ class _SettingWidgetState extends State<SettingWidget> {
     setState(() {
       pushNotifications = _prefs.getBool('pushNotifications') ?? false;
       darkMode = _prefs.getBool('darkMode') ?? false;
+      userImage = _prefs.getString('userImage') ?? 'assets/images/Matt.jpg';
     });
   }
 
-  Future<void> _saveSetting(String key, bool value) async {
+  Future<void> _saveSetting(String key, dynamic value) async {
     setState(() {
       if (key == 'pushNotifications') {
         pushNotifications = value;
@@ -42,7 +43,13 @@ class _SettingWidgetState extends State<SettingWidget> {
         darkMode = value;
       }
     });
-    await _prefs.setBool(key, value);
+
+    await _prefs.setString(key, value);
+
+    if (key == 'userImage') {
+      await _prefs.setString(
+          'userImage', value); // Sauvegarde du chemin de l'image
+    }
   }
 
   Future<void> _showPhotoSelectionDialog() async {
@@ -68,17 +75,16 @@ class _SettingWidgetState extends State<SettingWidget> {
       setState(() {
         userImage = newImage;
       });
+
+      await _saveSetting(
+          'userImage', newImage); // Sauvegarder la nouvelle image
     }
   }
 
   Widget _buildPhotoOption(String imagePath) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          userImage = imagePath;
-        });
-        Navigator.of(context)
-            .pop(); // Fermer la boîte de dialogue après la sélection
+        _selectNewImage(imagePath);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -88,6 +94,15 @@ class _SettingWidgetState extends State<SettingWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectNewImage(String imagePath) async {
+    setState(() {
+      userImage = imagePath;
+    });
+    Navigator.of(context)
+        .pop(); // Fermer la boîte de dialogue après la sélection
+    await _saveSetting('userImage', imagePath);
   }
 
   @override

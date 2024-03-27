@@ -154,11 +154,32 @@ class _SearchPageState extends State<SearchPage> {
                                           color:
                                               Color.fromRGBO(0, 80, 134, 1))))),
                     ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EnchantedStats()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text("Mes stats"),
+                      ),
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromRGBO(0, 80, 134, 1)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: BorderSide(
+                                          color:
+                                              Color.fromRGBO(0, 80, 134, 1))))),
+                    ),
                   ],
                 ),
-              ),
-              Expanded(
-                child: EnchantedStats(),
               ),
             ],
           ),
