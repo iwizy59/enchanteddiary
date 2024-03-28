@@ -21,7 +21,7 @@ class NoteDataSource {
     if (maps.isNotEmpty) {
       return Note.fromJson(maps.first);
     } else {
-      return null; // Retourner null si aucune note correspondante n'est trouvée
+      return null;
     }
   }
 
@@ -68,7 +68,6 @@ class NoteDataSource {
       String? emotionColor, String? searchText) async {
     final Database db = await DatabaseHelper.getDB();
 
-    // Créer une clause WHERE dynamique en fonction des paramètres
     String whereClause = '';
     List<dynamic> whereArguments = [];
 
@@ -86,9 +85,7 @@ class NoteDataSource {
       whereArguments.add('%$searchText%');
     }
 
-    // Exécuter la requête avec la clause WHERE dynamique
-    final List<Map<String, dynamic>> maps =
-        await db.query('Note', where: whereClause, whereArgs: whereArguments);
+    final List<Map<String, dynamic>> maps = await db.query('Note', where: whereClause, whereArgs: whereArguments);
 
     return maps.map((json) => Note.fromJson(json)).toList();
   }

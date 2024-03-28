@@ -18,11 +18,10 @@ Future<Map<DateTime, Color>> getNoteColorsForMonth(DateTime firstDay, DateTime l
   Map<DateTime, Color> noteColors = {};
   for (var map in maps) {
     DateTime date = DateTime.parse(map['date']);
-    // Supposons que map['color'] est une chaîne hexadécimale, par exemple "#ff5733"
-    String colorString = map['color']; // Obtenez la chaîne de la base de données
-    colorString = colorString.replaceFirst('#', ''); // Retirez le #
-    int colorInt = int.parse(colorString, radix: 16); // Convertissez en entier
-    Color color = Color(colorInt + 0xFF000000); // Créez l'objet Color
+    String colorString = map['color'];
+    colorString = colorString.replaceFirst('#', '');
+    int colorInt = int.parse(colorString, radix: 16);
+    Color color = Color(colorInt + 0xFF000000);
     noteColors[date] = color;
   }
   return noteColors;

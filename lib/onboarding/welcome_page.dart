@@ -29,7 +29,7 @@ class WelcomePageWidget extends StatelessWidget {
             children: [
               Image.asset("assets/images/onboarding/burger.png",
                   width: ScreenWidth * 0.65),
-              Text("Welcome",
+              Text("🧚🏿 Welcome pixy dust 🧚🏿",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -48,7 +48,7 @@ class WelcomePageWidget extends StatelessWidget {
                         style: new TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color.fromRGBO(0, 80, 134, 1))),
-                    new TextSpan(text: ' your secure personal diary'),
+                    new TextSpan(text: ',\nyour secured personal diary! 📖'),
                   ],
                 ),
               ),

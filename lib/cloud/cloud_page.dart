@@ -18,7 +18,7 @@ class Cloud extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: CloudPage(), // Utilisez votre widget CloudPage ici
+            child: CloudPage(),
           ),
           Container(
             width: double.infinity,

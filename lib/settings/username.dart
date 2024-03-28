@@ -8,13 +8,13 @@ class UsernameEditorRow extends StatefulWidget {
 
 class _UsernameEditorRowState extends State<UsernameEditorRow> {
   late TextEditingController _controller;
-  String _username = 'Username'; // Valeur initiale
+  String _username = 'Username';
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: _username);
-    _loadUsername(); // Charger le username initial de SharedPreferences
+    _loadUsername();
   }
 
   void _loadUsername() async {
@@ -59,7 +59,7 @@ class _UsernameEditorRowState extends State<UsernameEditorRow> {
     return Row(
       children: [
         Expanded(
-          child: Text(_username, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(_username, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
         ),
         IconButton(
           icon: Icon(Icons.edit),

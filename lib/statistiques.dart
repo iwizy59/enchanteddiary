@@ -11,19 +11,24 @@ class EnchantedStats extends StatefulWidget {
 }
 
 class _EnchantedStatsState extends State<EnchantedStats> {
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   int totalWords = 0;
   int totalNotes = 0;
   int average = 0;
   String longestNote = '';
   String longestNoteDate = '';
-  String longestDailyEntriesDuration = ''; // Nouvelle statistique ajoutée
+  String longestDailyEntriesDuration = ''; 
 
   @override
   void initState() {
     super.initState();
     _calculateTotalWords();
     _findLongestNote();
-    _findLongestDailyEntriesDuration(); // Appel de la nouvelle fonction
+    _findLongestDailyEntriesDuration(); 
   }
 
   Future<void> _calculateTotalWords() async {
@@ -62,7 +67,7 @@ class _EnchantedStatsState extends State<EnchantedStats> {
     final List<Note> allNotes = await NoteDataSource.getAllNotes();
     List<DateTime> noteDates = allNotes.map((note) => note.date).toList();
     noteDates
-        .sort((a, b) => a.compareTo(b)); // Trier les dates par ordre croissant
+        .sort((a, b) => a.compareTo(b));
     int longestDuration = 0;
     DateTime? startDate;
     DateTime? endDate;
@@ -80,7 +85,7 @@ class _EnchantedStatsState extends State<EnchantedStats> {
 
     if (longestDuration > 0 && startDate != null && endDate != null) {
       longestDailyEntriesDuration =
-          '${DateFormat('dd/MM/yyyy').format(startDate)} - ${DateFormat('dd/MM/yyyy').format(endDate)} (${longestDuration + 1} jours)'; // Ajout de la durée en jours
+          '${DateFormat('dd/MM/yyyy').format(startDate)} - ${DateFormat('dd/MM/yyyy').format(endDate)} (${longestDuration + 1} jours)';
     }
   }
 
@@ -98,9 +103,10 @@ class _EnchantedStatsState extends State<EnchantedStats> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomHeader(),
+      backgroundColor: darkBlue,
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(247, 214, 191, 1.0),
+          color: lightYellow,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -114,7 +120,8 @@ class _EnchantedStatsState extends State<EnchantedStats> {
                   style: TextStyle(
                     fontSize: 36.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: darkBlue,
+                    fontFamily: 'Poppins',
                     letterSpacing: 2.0,
                     shadows: [
                       Shadow(
@@ -158,10 +165,15 @@ class _EnchantedStatsState extends State<EnchantedStats> {
 }
 
 class StatItem extends StatelessWidget {
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   final String title;
   final String value;
 
-  const StatItem({Key? key, required this.title, required this.value})
+  StatItem({Key? key, required this.title, required this.value})
       : super(key: key);
 
   @override
@@ -171,7 +183,7 @@ class StatItem extends StatelessWidget {
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: lightBlue,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -189,7 +201,7 @@ class StatItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF5E503F),
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 10),
@@ -197,7 +209,7 @@ class StatItem extends StatelessWidget {
             value,
             style: TextStyle(
               fontSize: 18.0,
-              color: Color(0xFF5E503F),
+              color: Colors.white,
             ),
           ),
         ],

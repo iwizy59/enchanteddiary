@@ -15,6 +15,11 @@ class SettingWidget extends StatefulWidget {
 }
 
 class _SettingWidgetState extends State<SettingWidget> {
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   late SharedPreferences _prefs;
   bool pushNotifications = false;
   bool darkMode = false;
@@ -48,7 +53,7 @@ class _SettingWidgetState extends State<SettingWidget> {
 
     if (key == 'userImage') {
       await _prefs.setString(
-          'userImage', value); // Sauvegarde du chemin de l'image
+          'userImage', value);
     }
   }
 
@@ -77,7 +82,7 @@ class _SettingWidgetState extends State<SettingWidget> {
       });
 
       await _saveSetting(
-          'userImage', newImage); // Sauvegarder la nouvelle image
+          'userImage', newImage);
     }
   }
 
@@ -101,7 +106,7 @@ class _SettingWidgetState extends State<SettingWidget> {
       userImage = imagePath;
     });
     Navigator.of(context)
-        .pop(); // Fermer la boîte de dialogue après la sélection
+        .pop();
     await _saveSetting('userImage', imagePath);
   }
 
@@ -109,6 +114,7 @@ class _SettingWidgetState extends State<SettingWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomHeader(),
+      backgroundColor: lightYellow,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -126,7 +132,6 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                   SizedBox(width: 16),
                   Expanded(
-                    // Ajoutez ceci
                     child: UsernameEditorRow(),
                   ),
                 ],
@@ -136,16 +141,17 @@ class _SettingWidgetState extends State<SettingWidget> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, top: 8),
             child: Text(
-              "Préférences",
+              "Preferences",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800],
+                fontFamily: 'Poppins'
               ),
             ),
           ),
           ListTile(
-            title: Text("Change PIN"),
+            title: Text("Change PIN", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.pushReplacement(
@@ -155,7 +161,7 @@ class _SettingWidgetState extends State<SettingWidget> {
             },
           ),
           ListTile(
-            title: Text("Notifications push"),
+            title: Text("Push", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Switch(
               activeColor: Color.fromRGBO(127, 202, 199, 1.0),
               value: pushNotifications,
@@ -165,7 +171,7 @@ class _SettingWidgetState extends State<SettingWidget> {
             ),
           ),
           ListTile(
-            title: Text("Mode sombre"),
+            title: Text("Dark mode", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Switch(
               activeColor: Color.fromRGBO(127, 202, 199, 1.0),
               value: darkMode,
@@ -182,11 +188,12 @@ class _SettingWidgetState extends State<SettingWidget> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800],
+                fontFamily: 'Poppins',
               ),
             ),
           ),
           ListTile(
-            title: Text("About us"),
+            title: Text("About us", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(
@@ -194,7 +201,7 @@ class _SettingWidgetState extends State<SettingWidget> {
             },
           ),
           ListTile(
-            title: Text("Privacy policy"),
+            title: Text("Privacy policy", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(context,
@@ -202,7 +209,7 @@ class _SettingWidgetState extends State<SettingWidget> {
             },
           ),
           ListTile(
-            title: Text("Terms and conditions"),
+            title: Text("Terms and conditions", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(

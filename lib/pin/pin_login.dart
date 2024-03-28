@@ -15,7 +15,6 @@ class PinForm extends StatefulWidget {
 class _PinFormState extends State<PinForm> {
   String enteredPin = '';
 
-  // Color palette from provided hex codes
   final Color darkBlue = Color(0xFF001244);
   final Color lightBlue = Color(0xFF005086);
   final Color skyBlue = Color(0xFF318fb5);
@@ -32,7 +31,7 @@ class _PinFormState extends State<PinForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Welcome back to EnchantedDiary!\n\nTo access your personal space, please enter your PIN.\n\n',
+              'Welcome back to EnchantedDiary! 📖\n\nTo access your personal space, please enter your PIN. 😊\n\n',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: lightYellow,
@@ -145,7 +144,7 @@ class _PinFormState extends State<PinForm> {
               onPressed: () => _authenticate(context),
               child: Text('Valider'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: lightYellow, // Couleur lightBlue
+                backgroundColor: lightYellow,
               ),
             ),
             TextButton(
@@ -200,12 +199,15 @@ class _PinFormState extends State<PinForm> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Authentification échouée'),
-          content: Text('Le code PIN saisi est incorrect.'),
+          title: Text('☹️ Authentification failure ☹️',
+              style: TextStyle(color: lightYellow)),
+          backgroundColor: darkBlue,
+          content: Text('You entered the wrong PIN.',
+              style: TextStyle(color: lightYellow)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
+              child: Text('Try again ✨', style: TextStyle(color: lightYellow)),
             ),
           ],
         ),
@@ -218,14 +220,14 @@ class PinButton extends StatelessWidget {
   final String number;
   final VoidCallback onPressed;
   final Color color;
-  final Color textColor; // Couleur du texte
+  final Color textColor;
 
   const PinButton({
     Key? key,
     required this.number,
     required this.onPressed,
     required this.color,
-    required this.textColor, // Couleur du texte
+    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -236,7 +238,7 @@ class PinButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           number,
-          style: TextStyle(color: textColor), // Couleur du texte
+          style: TextStyle(color: textColor),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: color,

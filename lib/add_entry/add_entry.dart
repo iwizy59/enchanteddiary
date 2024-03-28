@@ -43,7 +43,6 @@ class _AddEntryWidgetState extends State<AddEntryWidget> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     TitleController.dispose();
     TextController.dispose();
     super.dispose();
