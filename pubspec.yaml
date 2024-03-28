@@ -37,6 +37,7 @@ dependencies:
   sqflite: ^2.3.2
   path: ^1.9.0
   image_picker: ^0.8.4+1
+  path_provider: ^2.0.14
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +73,10 @@ flutter:
   assets:
     - assets/images/
     - assets/images/onboarding/
+    - assets/images/Matt.jpg
+    - assets/images/Alexis.jpg
+    - assets/images/Clara.jpg
+    - assets/images/Mathias.jpg
   fonts:
     - family: DancingScript
       fonts:
