@@ -30,7 +30,7 @@ class _FooterState extends State<Footer> {
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Search()));
+            context, MaterialPageRoute(builder: (context) => SearchPage()));
         break;
       case 3:
         Navigator.push(
