@@ -36,6 +36,7 @@ dependencies:
   dots_indicator: ^2.1.1
   sqflite: ^2.3.2
   path: ^1.9.0
+  image_picker: ^0.8.4+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,13 +73,12 @@ flutter:
     - assets/images/
     - assets/images/onboarding/
   fonts:
-    - family: DancingScript     
+    - family: DancingScript
       fonts:
         - asset: assets/fonts/DancingScript-Regular.ttf
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Black.ttf
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
