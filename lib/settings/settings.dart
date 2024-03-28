@@ -44,7 +44,17 @@ class _SettingWidgetState extends State<SettingWidget> {
       pushNotifications = _prefs.getBool('pushNotifications') ?? false;
       darkMode = _prefs.getBool('darkMode') ?? false;
       userImage = _prefs.getString('userImage') ?? 'assets/images/Matt.jpg';
-      cameraImage = _prefs.getString('cameraImage') ?? 'assets/images/Matt.jpg';
+      String? cameraImagePath = _prefs.getString('cameraImage');
+      if (cameraImagePath == null) {
+        cameraImage = "assets/images/Matt.jpg";
+      } else {
+        File file = File(cameraImagePath);
+        if (file.existsSync()) {
+          cameraImage = cameraImagePath;
+        } else {
+          userImage = "assets/images/Matt.jpg";
+        }
+      }
     });
   }
 
@@ -65,6 +75,11 @@ class _SettingWidgetState extends State<SettingWidget> {
     } else if (key == 'cameraImage') {
       await _prefs.setString('cameraImage', value);
     }
+  }
+
+  Future<void> _deleteSetting(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(key);
   }
 
   Future<void> _showPhotoSelectionDialog() async {
@@ -93,8 +108,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         cameraImage = ''; // Vider l'image de la caméra
       });
 
-      await _saveSetting(
-          'userImage', newImage);
+      await _saveSetting('userImage', newImage);
     }
   }
 
@@ -138,10 +152,9 @@ class _SettingWidgetState extends State<SettingWidget> {
       userImage = imagePath;
       cameraImage = '';
     });
-    Navigator.of(context)
-        .pop();
+    Navigator.of(context).pop();
+    await _deleteSetting('cameraImage'); // Supprimer la clé 'cameraImage'
     await _saveSetting('userImage', imagePath);
-    await _saveSetting('cameraImage', '');
   }
 
   Future<String> _copyImageToAssetsDirectory(String sourceImagePath) async {
@@ -172,7 +185,7 @@ class _SettingWidgetState extends State<SettingWidget> {
       });
 
       Navigator.of(context).pop();
-      await _saveSetting("userImage", userImage);
+      await _deleteSetting('userImage');
       await _saveSetting('cameraImage', newImagePath);
     }
   }
@@ -221,11 +234,10 @@ class _SettingWidgetState extends State<SettingWidget> {
             child: Text(
               "Preferences",
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800],
-                fontFamily: 'Poppins'
-              ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
+                  fontFamily: 'Poppins'),
             ),
           ),
           ListTile(
@@ -279,7 +291,8 @@ class _SettingWidgetState extends State<SettingWidget> {
             },
           ),
           ListTile(
-            title: Text("Privacy policy", style: TextStyle(fontFamily: 'Poppins')),
+            title:
+                Text("Privacy policy", style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(context,
@@ -287,7 +300,8 @@ class _SettingWidgetState extends State<SettingWidget> {
             },
           ),
           ListTile(
-            title: Text("Terms and conditions", style: TextStyle(fontFamily: 'Poppins')),
+            title: Text("Terms and conditions",
+                style: TextStyle(fontFamily: 'Poppins')),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(
