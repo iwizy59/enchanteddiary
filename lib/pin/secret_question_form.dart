@@ -2,6 +2,8 @@ import 'package:enchanteddiary/pin/pin_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+final Color lightYellow = Color(0xFFf7d6bf);
+
 class SecretQuestionFormPage extends StatefulWidget {
   @override
   _SecretQuestionFormPageState createState() => _SecretQuestionFormPageState();
@@ -20,22 +22,29 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
               builder: (context) =>
                   PinConfigPage())); // Votre page de réinitialisation de PIN
     } else {
+      String errorMessage = 'Your answer is incorrect. Please try again.';
       showDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Erreur'),
-            content: Text('La réponse secrète est incorrecte.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Fermer la boîte de dialogue
-                },
-                child: Text('OK'),
+        builder: (context) => AlertDialog(
+          title: Text(
+            '☹️ Authentification failure ☹️',
+            style: TextStyle(color: lightYellow, fontSize: 21.0),
+          ),
+          backgroundColor: darkBlue,
+          content: Text(
+            errorMessage,
+            style: TextStyle(color: lightYellow),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Try again ✨',
+                style: TextStyle(color: lightYellow),
               ),
-            ],
-          );
-        },
+            ),
+          ],
+        ),
       );
     }
   }
