@@ -13,7 +13,8 @@ class CloudPage extends StatefulWidget {
 
 class _CloudPageState extends State<CloudPage> {
   int numberOfWords = 10; // Nombre de mots par défaut
-  late DateTime startDate = DateTime(2024, 3, 1); // Date de début par défaut
+  late DateTime startDate =
+      DateTime(2024, 3, 1); // Date de début par défaut
   late DateTime endDate = DateTime.now(); // Date de fin par défaut
 
   @override
@@ -21,89 +22,112 @@ class _CloudPageState extends State<CloudPage> {
     return Column(
       children: [
         Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 20),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Number of words: $numberOfWords',
-              style: TextStyle(
-                fontFamily: 'Poppins',
+          Expanded(
+            child: Center(
+              child: Text(
+                'Number of words: $numberOfWords',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                ),
               ),
-          ),
-          Slider(
-            value: numberOfWords.toDouble(),
-            min: 1,
-            max: 50,
-            divisions: 50,
-            label: numberOfWords.toString(),
-            onChanged: (value) {
-              setState(() {
-                numberOfWords = value.toInt();
-              });
-            },
+            ),
           ),
         ],
+      ),
+      Slider(
+        value: numberOfWords.toDouble(),
+        min: 1,
+        max: 50,
+        divisions: 50,
+        label: numberOfWords.toString(),
+        onChanged: (value) {
+          setState(() {
+            numberOfWords = value.toInt();
+          });
+        },
       ),
       SizedBox(height: 20),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('Start:',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-              ),),
-          IconButton(
-            onPressed: () async {
-              final selectedDate = await showDatePicker(
-                context: context,
-                initialDate: startDate,
-                firstDate: DateTime(2000),
-                lastDate: DateTime.now(),
-              );
-              if (selectedDate != null) {
-                setState(() {
-                  startDate = selectedDate;
-                });
-              }
-            },
-            icon: Icon(Icons.calendar_today),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Start:',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        final selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: startDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime.now(),
+                        );
+                        if (selectedDate != null) {
+                          setState(() {
+                            startDate = selectedDate;
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.calendar_today),
+                    ),
+                    Text(
+                      startDate.toString().split(' ')[0],
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10), // Ajoute un espace vertical entre les deux rangées
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'End:',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        final selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: endDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime.now(),
+                        );
+                        if (selectedDate != null) {
+                          setState(() {
+                            endDate = selectedDate;
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.calendar_today),
+                    ),
+                    Text(
+                      endDate.toString().split(' ')[0],
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(startDate.toString().split(' ')[0],
-              style: TextStyle(
-                fontFamily: 'Poppins',
-              ),),
-          Text('End:',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-              ),),
-          IconButton(
-            onPressed: () async {
-              final selectedDate = await showDatePicker(
-                context: context,
-                initialDate: endDate,
-                firstDate: DateTime(2000),
-                lastDate: DateTime.now(),
-              );
-              if (selectedDate != null) {
-                setState(() {
-                  endDate = selectedDate;
-                });
-              }
-            },
-            icon: Icon(Icons.calendar_today),
-          ),
-          Text(endDate.toString().split(' ')[0],
-              style: TextStyle(
-                fontFamily: 'Poppins',
-              ),),
-        ],
-      ),
-    ],
-  ),
-),
+        ),
 
         Expanded(
           child: FutureBuilder<List<WordData>>(
@@ -124,16 +148,21 @@ class _CloudPageState extends State<CloudPage> {
     );
   }
 
-  Future<List<WordData>> getTopWords(int numberOfWords, DateTime startDate, DateTime endDate) async {
+  Future<List<WordData>> getTopWords(
+      int numberOfWords, DateTime startDate, DateTime endDate) async {
     // Récupérer toutes les notes entre les dates sélectionnées
-    final List<Note> notes = await NoteDataSource.getNotesBetweenDates(startDate, endDate);
+    final List<Note> notes =
+        await NoteDataSource.getNotesBetweenDates(startDate, endDate);
 
     // Liste des mots à ignorer (prépositions, mots courts, etc.)
-    final List<String> wordsToIgnore = await StopWordies.getFor(locale: SWLocale.fr);
+    final List<String> wordsToIgnore =
+        await StopWordies.getFor(locale: SWLocale.fr);
     // Compter la fréquence de chaque mot
     final Map<String, int> wordFrequency = {};
     for (final note in notes) {
-      final List<String> words = note.text.replaceAll(RegExp(r'[,.]'), '').split(' '); // Supprimer les virgules et les points
+      final List<String> words = note.text
+          .replaceAll(RegExp(r'[,.]'), '')
+          .split(' '); // Supprimer les virgules et les points
       for (final word in words) {
         if (!wordsToIgnore.contains(word.toLowerCase()) && word.length > 3) {
           if (wordFrequency.containsKey(word)) {
@@ -147,19 +176,22 @@ class _CloudPageState extends State<CloudPage> {
 
     // Trier les mots par fréquence décroissante
     final List<MapEntry<String, int>> sortedEntries =
-        wordFrequency.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+        wordFrequency.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
 
     // Sélectionner le nombre spécifié de mots
     final List<MapEntry<String, int>> topEntries =
         sortedEntries.take(numberOfWords).toList();
 
     // Calculer la fréquence maximale pour normaliser la taille des mots
-    final int maxFrequency = topEntries.isNotEmpty ? topEntries.first.value : 1;
+    final int maxFrequency =
+        topEntries.isNotEmpty ? topEntries.first.value : 1;
 
     // Générer des données pour chaque mot
     final List<WordData> wordsData = topEntries.map((entry) {
       final double frequencyRatio = entry.value / maxFrequency;
-      final double fontSize = 20 + 40 * frequencyRatio; // Taille proportionnelle à la fréquence
+      final double fontSize =
+          20 + 40 * frequencyRatio; // Taille proportionnelle à la fréquence
       return WordData(entry.key, entry.value, fontSize);
     }).toList();
 
@@ -204,7 +236,6 @@ class CloudWidget extends StatelessWidget {
   }
 }
 
-
 extension IterableExtension<T> on Iterable<T> {
   Iterable<E> mapIndexed<E>(E Function(int index, T item) f) sync* {
     var index = 0;
@@ -229,7 +260,6 @@ class ScatterItem extends StatelessWidget {
 
   ScatterItem(this.wordData, this.index);
 
-  
   @override
   Widget build(BuildContext context) {
     final List<Color> colors = [
@@ -245,7 +275,8 @@ class ScatterItem extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme?.subtitle1;
     final style = textStyle?.copyWith(
       fontSize: wordData.fontSize,
-      color: colors[Random().nextInt(colors.length)], // Sélectionne une couleur aléatoire parmi la liste des couleurs disponibles
+      color: colors[Random().nextInt(colors.length)],
+      // Sélectionne une couleur aléatoire parmi la liste des couleurs disponibles
     );
     return RotatedBox(
       quarterTurns: index.isEven ? 0 : 1,
