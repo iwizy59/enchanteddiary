@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/database/data_sources/note_data_source.dart';
@@ -90,7 +89,9 @@ class _EnchantedStatsState extends State<EnchantedStats> {
   }
 
   int _average() {
-    average = (totalWords / totalNotes).round();
+    if (totalNotes != 0) {
+      average = (totalWords / totalNotes).round();
+    }
     return average.toInt();
   }
 

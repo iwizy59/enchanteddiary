@@ -8,6 +8,7 @@ import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/settings/privacy_policy.dart';
 import 'package:enchanteddiary/settings/terms_and_conditions.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SettingWidget extends StatefulWidget {
   @override
@@ -44,9 +45,9 @@ class _SettingWidgetState extends State<SettingWidget> {
       }
     });
 
-    await _prefs.setString(key, value);
-
-    if (key == 'userImage') {
+    if (key == 'pushNotifications' || key == 'darkMode') {
+      await _prefs.setBool(key, value);
+    } else if (key == 'userImage') {
       await _prefs.setString(
           'userImage', value); // Sauvegarde du chemin de l'image
     }
@@ -65,6 +66,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               _buildPhotoOption('assets/images/Clara.jpg'),
               _buildPhotoOption('assets/images/Matt.jpg'),
               _buildPhotoOption('assets/images/Mathias.jpg'),
+              _buildCameraOption(),
             ],
           ),
         );
@@ -96,13 +98,46 @@ class _SettingWidgetState extends State<SettingWidget> {
     );
   }
 
+  Widget _buildCameraOption() {
+    return GestureDetector(
+      onTap: () {
+        _takePhotoFromCamera();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          backgroundColor:
+              Colors.grey, // Change the color to indicate it's a camera option
+          radius: 30,
+          child: Icon(
+            Icons.camera_alt,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> _selectNewImage(String imagePath) async {
     setState(() {
       userImage = imagePath;
     });
-    Navigator.of(context)
-        .pop(); // Fermer la boîte de dialogue après la sélection
+    Navigator.of(context).pop();
     await _saveSetting('userImage', imagePath);
+  }
+
+  Future<void> _takePhotoFromCamera() async {
+    final picker = ImagePicker();
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        userImage = pickedFile.path;
+      });
+
+      await _saveSetting('userImage', pickedFile.path);
+    }
   }
 
   @override
