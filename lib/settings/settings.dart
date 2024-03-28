@@ -1,13 +1,15 @@
-import 'package:enchanteddiary/help/help.dart';
-import 'package:enchanteddiary/pin/secret_question_config.dart';
-import 'package:enchanteddiary/pin/secret_question_form.dart';
 import 'package:flutter/material.dart';
-import 'package:enchanteddiary/settings/username.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:enchanteddiary/help/help.dart';
+import 'package:enchanteddiary/pin/secret_question_form.dart';
 import 'package:enchanteddiary/footer.dart';
 import 'package:enchanteddiary/header/header.dart';
 import 'package:enchanteddiary/settings/privacy_policy.dart';
 import 'package:enchanteddiary/settings/terms_and_conditions.dart';
+import 'package:enchanteddiary/settings/username.dart';
 
 class SettingWidget extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _SettingWidgetState extends State<SettingWidget> {
   bool pushNotifications = false;
   bool darkMode = false;
   String userImage = '';
+  String cameraImage = '';
 
   @override
   void initState() {
@@ -32,6 +35,7 @@ class _SettingWidgetState extends State<SettingWidget> {
       pushNotifications = _prefs.getBool('pushNotifications') ?? false;
       darkMode = _prefs.getBool('darkMode') ?? false;
       userImage = _prefs.getString('userImage') ?? 'assets/images/Matt.jpg';
+      cameraImage = _prefs.getString('cameraImage') ?? 'assets/images/Matt.jpg';
     });
   }
 
@@ -44,11 +48,13 @@ class _SettingWidgetState extends State<SettingWidget> {
       }
     });
 
-    await _prefs.setString(key, value);
-
-    if (key == 'userImage') {
-      await _prefs.setString(
-          'userImage', value); // Sauvegarde du chemin de l'image
+    if (key == 'pushNotifications' || key == 'darkMode') {
+      await _prefs.setBool(key, value);
+    } else if (key == 'userImage') {
+      await _prefs.setString('userImage', value);
+      await _prefs.setString('cameraImage', '');
+    } else if (key == 'cameraImage') {
+      await _prefs.setString('cameraImage', value);
     }
   }
 
@@ -65,6 +71,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               _buildPhotoOption('assets/images/Clara.jpg'),
               _buildPhotoOption('assets/images/Matt.jpg'),
               _buildPhotoOption('assets/images/Mathias.jpg'),
+              _buildCameraOption(),
             ],
           ),
         );
@@ -74,6 +81,7 @@ class _SettingWidgetState extends State<SettingWidget> {
     if (newImage != null) {
       setState(() {
         userImage = newImage;
+        cameraImage = ''; // Vider l'image de la caméra
       });
 
       await _saveSetting(
@@ -96,13 +104,81 @@ class _SettingWidgetState extends State<SettingWidget> {
     );
   }
 
+  Widget _buildCameraOption() {
+    return GestureDetector(
+      onTap: () {
+        _takePhotoFromCamera();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          backgroundColor:
+              Colors.grey, // Change the color to indicate it's a camera option
+          radius: 30,
+          child: Icon(
+            Icons.camera_alt,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> _selectNewImage(String imagePath) async {
     setState(() {
       userImage = imagePath;
+      cameraImage = '';
     });
-    Navigator.of(context)
-        .pop(); // Fermer la boîte de dialogue après la sélection
+    Navigator.of(context).pop();
     await _saveSetting('userImage', imagePath);
+    await _saveSetting('cameraImage', '');
+  }
+
+  Future<String> _copyImageToAssetsDirectory(String sourceImagePath) async {
+    final String fileName = sourceImagePath.split('/').last;
+
+    // Obtenir le répertoire des ressources de l'application
+    final Directory appDir = await getApplicationDocumentsDirectory();
+    final String newPath = '${appDir.path}/$fileName';
+
+    // Copier l'image depuis le chemin source vers le répertoire des ressources
+    final File newImage = await File(sourceImagePath).copy(newPath);
+
+    return newPath;
+  }
+
+  Future<void> _takePhotoFromCamera() async {
+    final picker = ImagePicker();
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      final String newImagePath =
+          await _copyImageToAssetsDirectory(pickedFile.path);
+
+      setState(() {
+        userImage = '';
+        cameraImage = newImagePath;
+      });
+
+      Navigator.of(context).pop();
+      await _saveSetting("userImage", userImage);
+      await _saveSetting('cameraImage', newImagePath);
+    }
+  }
+
+  Widget _buildCircleAvatar() {
+    if (!cameraImage.isEmpty) {
+      return CircleAvatar(
+        radius: 30,
+        backgroundImage: FileImage(File(cameraImage)),
+      );
+    } else {
+      return CircleAvatar(
+        radius: 30,
+        backgroundImage: AssetImage(userImage),
+      );
+    }
   }
 
   @override
@@ -120,10 +196,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(userImage),
-                    radius: 30,
-                  ),
+                  _buildCircleAvatar(),
                   SizedBox(width: 16),
                   Expanded(
                     // Ajoutez ceci
