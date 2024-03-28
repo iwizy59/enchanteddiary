@@ -25,12 +25,12 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
     if (_answerController.text == correctAnswer) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PinConfigPage()));
     } else {
-      String errorMessage = 'Your answer is incorrect. Please try again.';
+      String errorMessage = 'Your answer is incorrect.';
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(
-            '☹️ Authentification failure ☹️',
+            '☹️ Failure ☹️',
             style: TextStyle(color: lightYellow, fontSize: 21.0),
           ),
           backgroundColor: darkBlue,
