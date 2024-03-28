@@ -207,10 +207,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(userImage),
-                    radius: 30,
-                  ),
+                  _buildCircleAvatar(),
                   SizedBox(width: 16),
                   Expanded(
                     child: UsernameEditorRow(),
