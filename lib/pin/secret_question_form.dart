@@ -14,9 +14,29 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
     final prefs = await SharedPreferences.getInstance();
     String correctAnswer = prefs.getString('secretAnswer') ?? '';
     if (_answerController.text == correctAnswer) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PinConfigPage())); // Votre page de réinitialisation de PIN
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PinConfigPage())); // Votre page de réinitialisation de PIN
     } else {
-      // Afficher une erreur
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Erreur'),
+            content: Text('La réponse secrète est incorrecte.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Fermer la boîte de dialogue
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -25,19 +45,25 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Answer Secret Question", style: TextStyle (color: Colors.white),
+        title: Text(
+          "Answer Secret Question",
+          style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color: Colors.white, // Couleur de la flèche de retour et d'autres icônes
+          color:
+              Colors.white, // Couleur de la flèche de retour et d'autres icônes
         ),
         backgroundColor: darkBlue, // Couleur personnalisée de l'AppBar
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // Augmenter le padding pour plus d'espace
+        padding: const EdgeInsets.all(
+            16.0), // Augmenter le padding pour plus d'espace
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Aligner les widgets à gauche
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // Aligner les widgets à gauche
           children: [
-            SizedBox(height: 20), // Ajouter de l'espace au-dessus de la question
+            SizedBox(
+                height: 20), // Ajouter de l'espace au-dessus de la question
             Text(
               "What is your favorite color?",
               style: TextStyle(
@@ -52,17 +78,16 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
               cursorColor: Colors.black,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(),
-                focusedBorder:
-                  OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: darkBlue, // Couleur de la bordure par défaut
-                      width: 1.0, // Épaisseur de la bordure
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: darkBlue, // Couleur de la bordure par défaut
+                    width: 1.0, // Épaisseur de la bordure
                   ),
-                ),// Ajouter une bordure au champ de texte
+                ), // Ajouter une bordure au champ de texte
                 labelText: "Your Answer",
                 labelStyle: TextStyle(
                   color: darkBlue, // Change la couleur du labelText
-                ),// Placeholder personnalisé
+                ), // Placeholder personnalisé
                 hintText: "Enter your favorite color",
               ),
             ),
@@ -72,8 +97,11 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
                 onPressed: _checkSecretAnswer,
                 child: Text("Submit"),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: darkBlue, // Couleur du texte du bouton
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15), // Padding plus grand pour le bouton
+                  foregroundColor: Colors.white,
+                  backgroundColor: darkBlue, // Couleur du texte du bouton
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 50,
+                      vertical: 15), // Padding plus grand pour le bouton
                 ),
               ),
             ),
@@ -82,5 +110,4 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
       ),
     );
   }
-
 }
