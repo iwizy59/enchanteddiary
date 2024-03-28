@@ -36,7 +36,6 @@ class Note {
     return Color(int.parse('FF$hexCode', radix: 16));
   }
 
-  // Méthode pour convertir une couleur Color en sa représentation hexadécimale
   static String colorToHex(Color color) {
     return '#${color.value.toRadixString(16).substring(2)}';
   }

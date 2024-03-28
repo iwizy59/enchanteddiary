@@ -14,7 +14,6 @@ class PinConfigPage extends StatefulWidget {
 class _PinConfigPageState extends State<PinConfigPage> {
   String enteredPin = '';
 
-  // Color palette from provided hex codes
   final Color darkBlue = Color(0xFF001244);
   final Color lightBlue = Color(0xFF005086);
   final Color skyBlue = Color(0xFF318fb5);
@@ -32,7 +31,7 @@ class _PinConfigPageState extends State<PinConfigPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Welcome to EnchantedDiary!\n\nTo secure your personal space, set up a 4-character PIN.',
+              'Welcome to EnchantedDiary! 📖\n\nTo secure your personal space, set up a 4-character PIN. 😊',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: lightYellow,
@@ -143,9 +142,9 @@ class _PinConfigPageState extends State<PinConfigPage> {
             ),
             ElevatedButton(
               onPressed: () => _onValidateButtonPressed(context),
-              child: Text('Validate'),
+              child: Text('Validation'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: lightYellow, // Couleur lightBlue
+                backgroundColor: lightYellow,
               ),
             ),
           ],
@@ -182,15 +181,18 @@ class _PinConfigPageState extends State<PinConfigPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Erreur'),
-        content: Text('Le code PIN doit être composé de 4 caractères.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
-          ),
-        ],
-      ),
+          title: Text('☹️ ERROR ☹️',
+              style: TextStyle(color: lightYellow)),
+          backgroundColor: darkBlue,
+          content: Text('Your PIN bust me 4-character long.',
+              style: TextStyle(color: lightYellow)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Alright ✨', style: TextStyle(color: lightYellow)),
+            ),
+          ],
+        ),
     );
   } else {
     print('Code PIN enregistré: $enteredPin');
@@ -220,14 +222,14 @@ class PinButton extends StatelessWidget {
   final String number;
   final VoidCallback onPressed;
   final Color color;
-  final Color textColor; // Couleur du texte
+  final Color textColor;
 
   const PinButton({
     Key? key,
     required this.number,
     required this.onPressed,
     required this.color,
-    required this.textColor, // Couleur du texte
+    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -238,7 +240,7 @@ class PinButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           number,
-          style: TextStyle(color: textColor), // Couleur du texte
+          style: TextStyle(color: textColor),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: color,

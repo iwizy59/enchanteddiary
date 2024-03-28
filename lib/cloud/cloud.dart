@@ -12,10 +12,9 @@ class CloudPage extends StatefulWidget {
 }
 
 class _CloudPageState extends State<CloudPage> {
-  int numberOfWords = 10; // Nombre de mots par défaut
-  late DateTime startDate =
-      DateTime(2024, 3, 1); // Date de début par défaut
-  late DateTime endDate = DateTime.now(); // Date de fin par défaut
+  int numberOfWords = 10;
+  late DateTime startDate = DateTime(2024, 3, 1);
+  late DateTime endDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +32,7 @@ class _CloudPageState extends State<CloudPage> {
             child: Center(
               child: Text(
                 'Number of words: $numberOfWords',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                ),
+                style: TextStyle(fontFamily: 'Poppins',),
               ),
             ),
           ),
@@ -59,10 +56,7 @@ class _CloudPageState extends State<CloudPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Start:',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
+                      'Start:', style: TextStyle(fontFamily: 'Poppins',),
                     ),
                     IconButton(
                       onPressed: () async {
@@ -89,7 +83,7 @@ class _CloudPageState extends State<CloudPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10), // Ajoute un espace vertical entre les deux rangées
+              SizedBox(height: 10),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,20 +143,17 @@ class _CloudPageState extends State<CloudPage> {
   }
 
   Future<List<WordData>> getTopWords(
-      int numberOfWords, DateTime startDate, DateTime endDate) async {
-    // Récupérer toutes les notes entre les dates sélectionnées
-    final List<Note> notes =
-        await NoteDataSource.getNotesBetweenDates(startDate, endDate);
+    int numberOfWords, DateTime startDate, DateTime endDate) async {
+    final List<Note> notes = await NoteDataSource.getNotesBetweenDates(startDate, endDate);
 
-    // Liste des mots à ignorer (prépositions, mots courts, etc.)
-    final List<String> wordsToIgnore =
-        await StopWordies.getFor(locale: SWLocale.fr);
-    // Compter la fréquence de chaque mot
+    List<String> wordsToIgnore = await StopWordies.getFor(locale: SWLocale.fr);
+    wordsToIgnore = await StopWordies.getFor(locale: SWLocale.en);
+
     final Map<String, int> wordFrequency = {};
     for (final note in notes) {
       final List<String> words = note.text
-          .replaceAll(RegExp(r'[,.]'), '')
-          .split(' '); // Supprimer les virgules et les points
+          .replaceAll(RegExp(r'[,.?!:]'), '')
+          .split(' ');
       for (final word in words) {
         if (!wordsToIgnore.contains(word.toLowerCase()) && word.length > 3) {
           if (wordFrequency.containsKey(word)) {
@@ -174,24 +165,15 @@ class _CloudPageState extends State<CloudPage> {
       }
     }
 
-    // Trier les mots par fréquence décroissante
-    final List<MapEntry<String, int>> sortedEntries =
-        wordFrequency.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
+    final List<MapEntry<String, int>> sortedEntries = wordFrequency.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
-    // Sélectionner le nombre spécifié de mots
-    final List<MapEntry<String, int>> topEntries =
-        sortedEntries.take(numberOfWords).toList();
+    final List<MapEntry<String, int>> topEntries = sortedEntries.take(numberOfWords).toList();
 
-    // Calculer la fréquence maximale pour normaliser la taille des mots
-    final int maxFrequency =
-        topEntries.isNotEmpty ? topEntries.first.value : 1;
+    final int maxFrequency = topEntries.isNotEmpty ? topEntries.first.value : 1;
 
-    // Générer des données pour chaque mot
     final List<WordData> wordsData = topEntries.map((entry) {
       final double frequencyRatio = entry.value / maxFrequency;
-      final double fontSize =
-          20 + 40 * frequencyRatio; // Taille proportionnelle à la fréquence
+      final double fontSize = 40 + 40 * frequencyRatio;
       return WordData(entry.key, entry.value, fontSize);
     }).toList();
 
@@ -214,12 +196,9 @@ class CloudWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mélanger la liste de mots
     final shuffledWordsData = wordsData.toList()..shuffle();
 
-    final List<Widget> widgets = shuffledWordsData
-        .mapIndexed((index, wordData) => ScatterItem(wordData, index))
-        .toList();
+    final List<Widget> widgets = shuffledWordsData.mapIndexed((index, wordData) => ScatterItem(wordData, index)).toList();
 
     final screenSize = MediaQuery.of(context).size;
     final ratio = screenSize.width / screenSize.height;
@@ -262,21 +241,12 @@ class ScatterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Color> colors = [
-      red,
-      orange,
-      yellow,
-      green,
-      blue,
-      purple,
-      pink,
-    ];
+    final List<Color> colors = [red, orange, yellow, green, blue, purple, pink,];
 
     final textStyle = Theme.of(context).textTheme?.subtitle1;
     final style = textStyle?.copyWith(
       fontSize: wordData.fontSize,
       color: colors[Random().nextInt(colors.length)],
-      // Sélectionne une couleur aléatoire parmi la liste des couleurs disponibles
     );
     return RotatedBox(
       quarterTurns: index.isEven ? 0 : 1,

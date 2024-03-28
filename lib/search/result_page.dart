@@ -22,6 +22,12 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color skyBlue = Color(0xFF318fb5);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   TextEditingController _textFieldController = TextEditingController();
   String localSearchResult = "";
   bool isSearching = false;
@@ -29,7 +35,6 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   Future<void> fetchData() async {
     isSearching = true;
-    //await Future.delayed(Duration(seconds: 1));
 
     NoteDataSource.searchNotes(
             getColorFromEmoji(widget.emoji), localSearchResult)
@@ -59,7 +64,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomHeader(appBarColor: Colors.white),
+      appBar: CustomHeader(),
+      backgroundColor: lightYellow,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -78,13 +84,13 @@ class _SearchResultPageState extends State<SearchResultPage> {
                       });
                       fetchData();
                     },
-                    style: TextStyle(fontSize: 13),
+                    style: TextStyle(fontSize: 13, fontFamily: 'Poppins'),
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 15.0),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14)),
-                        hintText: "L’amour de ma vie Alexis"),
+                        hintText: "My dearly beloved Alexis..."),
                   ),
                 ],
               ),
@@ -93,11 +99,11 @@ class _SearchResultPageState extends State<SearchResultPage> {
               child: isSearching
                   ? Center(
                       child:
-                          CircularProgressIndicator(), // Indicateur de chargement
+                          CircularProgressIndicator(),
                     )
                   : searchResults.isEmpty
                       ? Center(
-                          child: Text("Il n'y a pas de résultats"),
+                          child: Text("There's no such result 😭", style: TextStyle(fontFamily: 'Poppins')),
                         )
                       : ListView.builder(
                           itemCount: searchResults.length,
@@ -108,8 +114,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                 border: Border(
                                   top: BorderSide(
                                     color: Color.fromRGBO(0, 80, 134,
-                                        1), // Couleur de la barre bleue
-                                    width: 2.0, // Largeur de la barre bleue
+                                        1),
+                                    width: 2.0, 
                                   ),
                                 ),
                               ),
@@ -135,8 +141,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                                   .format(item.date),
                                               maxLines: 1,
                                               style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      0, 80, 134, 1),
+                                                  color: darkBlue,
                                                   fontSize: 11,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -154,13 +159,13 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                                   maxLines: 1,
                                                   style: TextStyle(
                                                       fontSize: 11,
-                                                      color: Colors.black),
+                                                      color: darkBlue),
                                                 ),
                                                 Text(item.text,
                                                     maxLines: 2,
                                                     style: TextStyle(
                                                         fontSize: 11,
-                                                        color: Colors.grey))
+                                                        color: skyBlue))
                                               ],
                                             ),
                                           ),

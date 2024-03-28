@@ -2,9 +2,9 @@ import 'package:enchanteddiary/calendar/calendar_page.dart';
 import 'package:enchanteddiary/search/search_page.dart';
 import 'package:enchanteddiary/settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:enchanteddiary/settings.dart';
+import 'package:enchanteddiary/settings/settings.dart';
 import 'package:enchanteddiary/cloud/cloud_page.dart';
-import 'package:enchanteddiary/search_page.dart';
+import 'package:enchanteddiary/search/search_page.dart';
 
 class Footer extends StatefulWidget {
   @override

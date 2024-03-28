@@ -1,6 +1,7 @@
 import 'package:enchanteddiary/pin/pin_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:enchanteddiary/header/header.dart';
 
 class SecretQuestionFormPage extends StatefulWidget {
   @override
@@ -10,43 +11,40 @@ class SecretQuestionFormPage extends StatefulWidget {
 class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
   final _answerController = TextEditingController();
 
+  final Color darkBlue = Color(0xFF001244);
+  final Color lightBlue = Color(0xFF005086);
+  final Color skyBlue = Color(0xFF318fb5);
+  final Color lightGray = Color(0xFFb0cac7);
+  final Color lightYellow = Color(0xFFf7d6bf);
+
   void _checkSecretAnswer() async {
     final prefs = await SharedPreferences.getInstance();
     String correctAnswer = prefs.getString('secretAnswer') ?? '';
     if (_answerController.text == correctAnswer) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PinConfigPage())); // Votre page de réinitialisation de PIN
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PinConfigPage()));
     } else {
-      // Afficher une erreur
     }
   }
-
-  final Color darkBlue = Color(0xFF001244);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Answer Secret Question", style: TextStyle (color: Colors.white),
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.white, // Couleur de la flèche de retour et d'autres icônes
-        ),
-        backgroundColor: darkBlue, // Couleur personnalisée de l'AppBar
-      ),
+      appBar: CustomHeader(),
+      backgroundColor: darkBlue,
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // Augmenter le padding pour plus d'espace
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Aligner les widgets à gauche
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20), // Ajouter de l'espace au-dessus de la question
+            SizedBox(height: 20),
             Text(
-              "What is your favorite color?",
+              "What is your favorite color? 🎨",
               style: TextStyle(
-                fontSize: 18, // Taille de police plus grande
-                fontWeight: FontWeight.bold, // Rendre le texte en gras
-                color: darkBlue, // Couleur du texte
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: lightYellow,
               ),
             ),
-            SizedBox(height: 10), // Espacer la question du champ de saisie
+            SizedBox(height: 10),
             TextField(
               controller: _answerController,
               cursorColor: Colors.black,
@@ -55,25 +53,31 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
                 focusedBorder:
                   OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: darkBlue, // Couleur de la bordure par défaut
-                      width: 1.0, // Épaisseur de la bordure
+                      color: darkBlue,
+                      width: 1.0,
                   ),
-                ),// Ajouter une bordure au champ de texte
-                labelText: "Your Answer",
+                ),
+                labelText: "Type your answer here 😊",
                 labelStyle: TextStyle(
-                  color: darkBlue, // Change la couleur du labelText
-                ),// Placeholder personnalisé
-                hintText: "Enter your favorite color",
+                  color: lightYellow,
+                ),
+                hintText: "Enter your favorite color 🟡",
+                hintStyle: TextStyle(
+                  color: lightYellow,
+                ),
               ),
+              style: TextStyle(
+                  color: lightYellow,
+                ),
             ),
-            SizedBox(height: 20), // Espacer le champ de saisie du bouton
+            SizedBox(height: 20),
             Center(
               child: ElevatedButton(
                 onPressed: _checkSecretAnswer,
                 child: Text("Submit"),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: darkBlue, // Couleur du texte du bouton
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15), // Padding plus grand pour le bouton
+                  foregroundColor: skyBlue, backgroundColor: lightYellow,
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
               ),
             ),

@@ -30,7 +30,7 @@ class SecurePageWidget extends StatelessWidget {
             children: [
               Image.asset("assets/images/onboarding/car.png",
                   width: ScreenWidth * 0.65),
-              Text("Security",
+              Text("🔐 Security 🔐",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -45,7 +45,7 @@ class SecurePageWidget extends StatelessWidget {
                   children: <TextSpan>[
                     new TextSpan(
                         text:
-                            'First, you will need to set a PIN to secure your Diary.'),
+                            'First, you will need to set a PIN to secure your diary.'),
                   ],
                 ),
               ),
