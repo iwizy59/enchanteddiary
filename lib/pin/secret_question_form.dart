@@ -23,6 +23,23 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
     if (_answerController.text == correctAnswer) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PinConfigPage()));
     } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Erreur'),
+            content: Text('La réponse secrète est incorrecte.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Fermer la boîte de dialogue
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
   @override
@@ -86,5 +103,4 @@ class _SecretQuestionFormPageState extends State<SecretQuestionFormPage> {
       ),
     );
   }
-
 }
