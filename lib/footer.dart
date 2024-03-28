@@ -3,7 +3,8 @@ import 'package:enchanteddiary/search/search_page.dart';
 import 'package:enchanteddiary/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:enchanteddiary/settings.dart';
-import 'package:enchanteddiary/cloud_page.dart';
+import 'package:enchanteddiary/cloud/cloud_page.dart';
+import 'package:enchanteddiary/search_page.dart';
 
 class Footer extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _FooterState extends State<Footer> {
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SearchPage()));
+            context, MaterialPageRoute(builder: (context) => Search()));
         break;
       case 3:
         Navigator.push(

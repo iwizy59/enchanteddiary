@@ -41,6 +41,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   pin_code_fields: ^8.0.1
+  word_cloud: ^1.0.1
+  flutter_scatter: ^0.2.0
+  stopwordies: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,9 @@ flutter:
     - family: DancingScript     
       fonts:
         - asset: assets/fonts/DancingScript-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Black.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
