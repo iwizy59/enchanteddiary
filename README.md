@@ -27,7 +27,7 @@ flutter pub get
 3. Lancer l'application (de façon usuelle, sur votre support préféré)
 
 ## Base de données
-Les fichiers de la base de données sont accessibles dans le répertoire `lib/database`. On utilise la librarie *sqflite_common* (2.5.3) pour cela.
+Les fonctions qui permettent d'inéragir avec la base de données sont accessibles dans le répertoire `lib/database`. On utilise la librarie *sqflite_common* (2.5.3) pour cela.
 
 ## Spécificités
 
@@ -46,6 +46,6 @@ Le projet utilise ***Flutter*** avec différentes librairies.
 
 ## Ressources
 - **Maquette :** https://www.figma.com/file/d17PziH0MH5Wlcm0dibuKj/EnchantedDiary
-- **Sprint retropesctives** : https://metroretro.io/BOUWW3KQME3F + `retro.pdf`
+- **Sprint retropesctives** : https://metroretro.io/BOUWW3KQME3F + `retro.txt`
 - **Support de la présentation :** accessible dans le fichier `presentation.pdf`
 - **Trello** : https://trello.com/b/ICz0OOA3/enchanteddiary

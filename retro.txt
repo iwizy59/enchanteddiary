@@ -1,0 +1,11 @@
+Dans la retrospective du sprint 1, nous avions défini 3 actions :
+- Faire un court point en fin de journée pour signaler notre état d'avancée
+- Continuer les pauses cafés
+- Ne plus faire de montée de versions des technos qu'on utilise
+
+Dans le sprint 2, nous avons effectivement mis en œuvre les actions définies lors de la rétro du sprint 1 :
+- En fin de journée, nous faisions un point pour partager notre état d'avancement, cela permet d'être plus productif le lendemain pendant les dailys
+- Nous avons continuer nos pauses café (1 par demi-journée, après le daily souvent), cela permet de favoriser l'énergie de l'équipe, et d'échanger dans un cadre plus détendu de notre avancement, des problèmes qu'on a rencontré, des progrès qu'on réalise.
+- Ne plus faire les mises à jour nous a permis d'être opérationnel tout le temps (3 demi-journées de sacrifiées à la résolution de problèmes lors du sprint 1 pour la moitié de l'équipe à chaque fois)
+
+La communication au sein de l'équipe pendant le srpint 2 a été encore meilleure par conséquent.
