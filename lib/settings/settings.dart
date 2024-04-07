@@ -135,8 +135,7 @@ class _SettingWidgetState extends State<SettingWidget> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor:
-              Colors.grey, // Change the color to indicate it's a camera option
+          backgroundColor: Colors.grey,
           radius: 30,
           child: Icon(
             Icons.camera_alt,
@@ -153,19 +152,15 @@ class _SettingWidgetState extends State<SettingWidget> {
       cameraImage = '';
     });
     Navigator.of(context).pop();
-    await _deleteSetting('cameraImage'); // Supprimer la clé 'cameraImage'
+    await _deleteSetting('cameraImage');
     await _saveSetting('userImage', imagePath);
   }
 
   Future<String> _copyImageToAssetsDirectory(String sourceImagePath) async {
     final String fileName = sourceImagePath.split('/').last;
 
-    // Obtenir le répertoire des ressources de l'application
     final Directory appDir = await getApplicationDocumentsDirectory();
     final String newPath = '${appDir.path}/$fileName';
-
-    // Copier l'image depuis le chemin source vers le répertoire des ressources
-    final File newImage = await File(sourceImagePath).copy(newPath);
 
     return newPath;
   }
