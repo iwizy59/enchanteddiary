@@ -5,7 +5,7 @@
 Équipe :
 - BOUCHENDHOMME Alexis, développeur
 - CHOQUET Mathias, *scrum master*
-- DELHOUTE Clara
+- DELHOUTE Clara, développeuse
 - DESTICOURT Matt, *product owner*
 
 ## Table des matières
